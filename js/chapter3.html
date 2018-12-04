@@ -12,79 +12,155 @@
 
     // p.80
     // var date = new Date();
-    // var Second = date.getMilliseconds();
-    // alert(Second)
+    // var second = date.getHours();
+    // alert(second)
     //
     // var date = new Date();
     // var second = date.getMilliseconds();
-    // alert(Second)
+    // alert(second)
     //
-    // var date = new Date();
-    // var second = date.getMilliseconds();
-    // alert(Second)
-    //
-    // var date = new Date();
-    // var second = date.getSeconds();
-    // alert(Second)
-
-
     // var date = new Date();
     // var time = date.getTime();
     // alert(time)
 
+    // p.81
+    var date = new Date();
+    let minute = date.getMinutes();
+    var currentTime = date.getMinutes();
+    if (currentTime - minute < 30) {
+      alert('30분 이전입니다.')
+    } else if (currentTime - minute >= 30) {
+      alert('30분 이후입니다.')
+    };
+
+    // p.81 (2)
+    var date = new Date();
+    var currentMonth = date.getMonth();
+
+    if (currentMonth < 4) {
+      alert('Spring')
+    } else if (currentMonth < 7) {
+      alert('Summer')
+    } else if (currentMonth < 10) {
+      alert('Fall')
+    } else {
+      alert('Winter')
+    };
+
+
+    // p.85
+    // let number = prompt();
+    // if (number < 0) {
+    //   alert('음수입니다.')
+    // } else if (number == 0) {
+    //   alert('0입니다.')
+    // } else {
+    //   alert('양수입니다')
+    // };
+
+    // p.85 (2)
+    // let number2 = prompt();
+    // if (number2 % 2 == 0) {
+    //   alert('짝수입니다.')
+    // } else {
+    //   alert('홀수입니다')
+    // };
+
+    // p.85 (3)
+    // let number3 = prompt();
+    // let average = (number + number2 + number3) / 3
+    // if (number > 80) {
+    //   alert('수')
+    // } else {
+    //   alert('우미양가')
+    // };
+
+
+    // p.88
+    // var date = new Date();
+    // var hour = date.getHours();
+    //
+    // // switch (true) {
+    // switch (hour) {
+    //   case hour < 11:
+    //     alert('아침');
+    //     break;
+    //   case hour < 15:
+    //     alert('점심');
+    //     break;
+    //   default:
+    //     alert('저녁');
+    //     break;
+    // }
 
 
     // p.90
     // var output = false || false;
     // alert(output)
-    // alert(false || true)
+    // alert(false || false)
 
 
     // p.92
     // var output = '안녕하세요'.indexOf('녕하');
+    // var output = '안녕하세요'.indexOf('녕세');
     // alert(output);
 
 
     // p.93
-    // (1)
-    // var input = prompt('안녕 or 잘자', '아무거나 입력해주세요.')
-    // if (input.indexOf('안녕') != -1){
-    //   alert('안녕하세요')
-    // } else if (input.indexOf('잘자') >= 0 || input.indexOf('잘 자') >= 0){
-    //         alert('안녕히 주무세요')
-    // } else {
-    //   alert('What!?')
-    // }
+    // 1) Using 'if'
+    var input = prompt();
+    if (input.indexOf('안녕') != -1) {
+      alert('안녕하세요');
+    } else if (input.indexOf('잘자') != -1 || input.indexOf('잘 자') != -1) {
+      alert('안녕히 주무세요');
+    }
 
-    // (2)
-    // let input = prompt('안녕 or 잘자', '아무거나 입력해주세요.')
-    // let output = input.indexOf('안녕')
-    // if (output == -1){
-    //   alert('인사를 안하다니')
-    // } else if (output != -1 ){
-    //   alert('오냐')
-    // }
-
-    // (3)
-    // let input = prompt('숫자점', '숫자를 아무거나 입력해주세요.')
-    // if (input % 4){
-    //   alert('4로 안나너지네요')
-    // } else {
-    //   alert('4로 나눌 수 있느 숫자입니다')
-    // }
-
-    // (4)
-    // let input = prompt('숫자점', '숫자를 아무거나 입력해주세요.')
-    // // switch (input){
-    // switch (true){
-    //   case input > 0:
-    //     alert('양수네')
+    // 1-2) Using 'switch'
+    // var input = prompt();
+    // // switch (input) {
+    // switch (true) {
+    //   case input.indexOf('안녕') != -1:
+    //     alert('안녕하세요');
     //     break;
-    //   case input < 0:
-    //     alert('음수요')
+    //   case input.indexOf('잘자') != -1 || input.indexOf('잘 자') != -1:
+    //     alert('안녕히 주무세요');
     //     break;
     //   default:
-    //     alert('0네요')
+    //     alert('똑바로 해라');
+    //     break;
+    // }
+
+    // 2)
+    // var input = prompt();
+    // if (input.indexOf('안녕') == -1) {
+    //   alert('인사를 안 하다니');
+    // } else {
+    //   alert('오냐');
+    // }
+
+    // 3)
+    let num = Number(prompt());
+    // if (num % 4 == 0) {
+    if (!(num % 4)) {
+      alert('4로 나눌 수 있는 숫자입니다');
+    } else {
+      alert('안되');
+    }
+
+    // 4)
+    // var input = prompt();
+    // switch (true) {
+    //   case input > 0:
+    //     alert('양수입니다');
+    //     break;
+    //   case input < 0:
+    //     alert('음수입니다');
+    //     break;
+    //   case input == 0:
+    //     alert('0입니다');
+    //     break;
+    //   default:
+    //     alert('똑바로 해라');
     //     break;
     // }
 
