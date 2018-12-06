@@ -346,6 +346,67 @@
     test(...array, ...array);
 
 
+    // [PRACTICE 01]
+    // function test(a,b,c) {
+    //   console.log(a);
+    //   console.log(a * b);
+    //   console.log(a * b * c);
+    // }
+    // test(10, 100);
+
+
+    // [PRACTICE 02]
+    // 2-1
+    function power(x, y) {
+      length = arguments.length
+      if (length == 1)
+        return x * x;
+      else if (length == 2) {
+        let powerResult = 1;
+        for (let i=0; i<y; i++) {
+          powerResult *= x;
+        }
+        return powerResult;
+      }
+    }
+    ret = power(2);
+    console.log(ret);
+    ret = power(2,3);
+    console.log(ret);
+
+    // 2-2
+    function multiply(...number) {
+      let multiplyResult = 1;
+      for (i of number) {
+        multiplyResult *= i;
+      }
+      return multiplyResult;
+    }
+    ret = multiply(1,2,3,4,5);
+    console.log(ret);
+
+
+    // [PRACTICE 03]
+    // (4)
+
+
+    // [PRACTICE 04]
+
+    function isInputNumber(number) {
+      let ret = parseInt(number);
+      // console.log(typeof(ret));
+      // console.log(ret);
+      if (typeof(ret) == 'number')
+        return true;
+      else
+        return false;
+    }
+
+    let input = prompt();
+    ret = isInputNumber(input);
+    console.log(ret);
+
+
   </script>
 
 </head>
