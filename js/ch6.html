@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+  <script>
+
+    // p.172
+    // [code 6-3]
+    var product = {
+      제품명: '7D 건조 망고',
+      유형: '당절임',
+      성분: '망고, 설탕, 메타중아황산나트륨, 치자황색소',
+      원산지: '필리핀',
+      '테스트 space': '테스트 space',
+      123: '숫자'
+    };
+
+    console.log(product.제품명);
+    console.log(product.유형);
+    // console.log(product['제품명']);
+    // console.log(product['유형']);
+
+    // p.174
+    // console.log(product.'테스트 space'); // error
+    console.log(product['테스트 space']);
+    // console.log(producct.123);    // error - ncaught SyntaxError: missing ) after argument list
+    // console.log(producct.'123');    // error - Uncaught SyntaxError: Unexpected string
+    // console.log(producct['123']); // error - Uncaught ReferenceError: producct is not defined
+    // console.log(producct[123]); // error - Uncaught ReferenceError: producct is not defined
+
+    // p.175
+    // [code 6-7]
+    var person = {
+      name: '윤인성',
+      adverb: '맛잇게',
+      eat: function (food) {
+        // console.log(this.name + '이 ' + food + '을/를 ' + this.adverb + ' 먹습니다.');
+        console.log(`${this.name}이 ${food}을/를 ${this.adverb} 먹습니다.`);
+      }
+    };
+    person.eat('치킨');
+
+
+    // p.176
+    // [code 6-8]
+    var product = {
+      name: 'Microsoft Visual Studio 2015 Ultimate',
+      price: '15,000,000원',
+      language: '한국어',
+      supportOS: 'Win 32/64',
+      subscription: true
+    };
+
+    var output = '';
+    for (var key in product) {
+      output += '●' + key + ':' + product[key] + '\n';
+    }
+    console.log(output);
+
+    // error - TypeError: product is not iterable
+    // var output = '';
+    // for (var key of product) {
+    //   output += '●' + key + ':' + product[key] + '\n';
+    // }
+    // console.log(output);
+
+
+    // p.178
+    // 6.4.1 in 키워드
+    // var student = {
+    //   이름: '연하진',
+    //   국어: 92, 수학: 98, 영어: 96, 과학: 98
+    // };
+    // var output = '';
+    // output += "'이름' in student: " + ('이름' in student) + '\n';
+    // output += "'성별' in student: " + ('성별' in student) + '\n';
+    // output += "'영어' in student: " + ('영어' in student);
+    //
+    // console.log(output);
+
+
+
+    // 6.4.2 with 키워드
+    // p.180
+    var student = {
+      이름: '연하진',
+      국어: 92, 수학: 98, 영어: 96, 과학: 98
+    };
+    var output = '';
+    with (student) {
+      output += '이름: ' + 이름 + '\n';
+      output += '국어: ' + 국어 + '\n';
+      output += '수학: ' + 수학 + '\n';
+      output += '영어: ' + 영어 + '\n';
+      output += '과학: ' + 과학 + '\n';
+      output += '총점: ' + 국어 + 수학 + 영어 + 과학 + '\n';
+      // 181207
+      // The above line will make an ouput as '92989698'
+      // Because the sum action happens between string and number
+      output += '총점: ' + (국어 + 수학 + 영어 + 과학);
+    }
+    console.log(output);
+
+
+    // p.181
+    // [code 6-13]
+    var student = {
+      이름: '연하진',
+      국어: 92, 수학: 98, 영어: 96, 과학: 98,
+      output: '겹치지롱'
+    };
+    var output = '';
+    with (student) {
+      window.output += '이름: ' + 이름 + '\n';
+      window.output += '국어: ' + 국어 + '\n';
+      window.output += '수학: ' + 수학 + '\n';
+      window.output += '영어: ' + 영어 + '\n';
+      window.output += '과학: ' + 과학 + '\n';
+      window.output += '총점: ' + (국어 + 수학 + 영어 + 과학);
+    }
+    console.log(output);
+
+    // p.183
+    var student = {};
+
+    // 객체에 속성을 추가합니다.
+    student.이름 = '윤인성';
+    student.취미 = '악기';
+    student.특기 = '프로그래밍';
+    student.장래희망 = '생명공학자';
+
+    // 객체에 toString() 메서드를 만듭니다.
+    student.toString = function () {
+      var output = '';
+      for (var key in this) {
+        // toString() 메서드는 출력하지 않게 합니다.
+        // if (key != 'toString') {
+        if (key) {
+          output += key + '\t' + this[key] + '\n';
+        }
+      }
+      return output;
+    };
+
+    console.log(student.toString());
+
+    // p.185
+    // 6.5.2 속성 제거
+    // [code 6-18]
+    console.log(student);
+
+    delete (student.toString);
+    delete (student.장래희망);
+
+    console.log(student.toString()); // show '[object Object]'
+    console.log(student);
+
+
+    // p.186
+    var students = [];
+    students.push({이름: '윤인성', 국어: 87, 수학: 98, 영어: 88, 과학: 95});
+    students.push({이름: '연하진', 국어: 92, 수학: 98, 영어: 88, 과학: 95});
+    students.push({이름: '구지연', 국어: 76, 수학: 98, 영어: 88, 과학: 95});
+    students.push({이름: '나선주', 국어: 98, 수학: 98, 영어: 88, 과학: 95});
+    students.push({이름: '윤아린', 국어: 95, 수학: 98, 영어: 88, 과학: 95});
+    students.push({이름: '윤명월', 국어: 64, 수학: 98, 영어: 88, 과학: 95});
+    students.push({이름: '김미화', 국어: 82, 수학: 98, 영어: 88, 과학: 95});
+    students.push({이름: '김연화', 국어: 88, 수학: 98, 영어: 88, 과학: 95});
+    students.push({이름: '박아현', 국어: 97, 수학: 98, 영어: 88, 과학: 95});
+    students.push({이름: '서준서', 국어: 45, 수학: 98, 영어: 88, 과학: 95});
+
+
+    // p.187
+    // [code 6-21] 메서드 추가
+    for (var i in students) {
+      // students[i].getSum = () => {return this.국어 + this.수학 + this.영어 + this.과학;};
+      students[i].getSum = function() {
+        return this.국어 + this.수학 + this.영어 + this.과학;
+      };
+      // students[i].getAverage = () => {return this.getSum() / 4;};
+      students[i].getAverage = function() {
+        return this.getSum() / 4;
+      };
+    }
+    console.log(students);
+
+
+
+    // p.188
+    // 1)
+    var output = '이름\t총점\t평균\n';
+    for (var i in students) {
+      output += students[i].이름 + '\t' + students[i].getSum() + '\t' + students[i].getAverage() + '\n';
+    }
+    console.log(output);
+
+    // 2) using 'with'
+    var output = '이름\t총점\t평균\n';
+    for (var i in students) {
+      with (students[i]) {
+        output += 이름 + '\t' + getSum() + '\t' + getAverage() + '\n';
+      }
+    }
+    console.log(output);
+
+
+
+    // p.190
+    // [code 6-25]
+    function makeStudent(name, korean, math, english, science) {
+      var willReturn = {
+        이름: name,
+        국어: korean,
+        수학: math,
+        영어: english,
+        과학: science,
+
+        getSum: function () {
+          return this.국어 + this.수학 + this.영어 + this.과학;
+        },
+
+        getAverage: function () {
+          return this.getSum() / 4;
+        },
+
+        toString: function () {
+          return this.이름 + '\t' + this.getSum() + '\t' + this.getAverage() + '\n';
+        }
+      };
+      return willReturn
+    }
+
+    // p.191
+    // [code 6-26]
+    var students = []
+    students.push(makeStudent('윤인성', 87, 98, 88, 95))
+    students.push(makeStudent('연하진', 92, 98, 88, 95))
+    students.push(makeStudent('구지연', 76, 98, 88, 95))
+    students.push(makeStudent('나선주', 98, 98, 88, 95))
+    students.push(makeStudent('윤아린', 95, 98, 88, 95))
+    students.push(makeStudent('윤명월', 64, 98, 88, 95))
+    students.push(makeStudent('김미화', 82, 98, 88, 95))
+    students.push(makeStudent('김연화', 88, 98, 88, 95))
+    students.push(makeStudent('박아현', 97, 98, 88, 95))
+    students.push(makeStudent('서준서', 45, 98, 88, 95))
+    console.log(students);
+
+    var output = '이름\t총점\t평균\n';
+    for (var i in students) {
+        output += students[i].toString();
+    }
+    console.log(output);
+
+
+    // 6.8.2 참조 복사와 값 복사
+    // p.198
+    function clone(obj) {
+      var output = {};
+      for (var i in obj){
+        output[i] = obj[i];
+      }
+      return output;
+    }
+
+    var original = {a: 10, b: 20};
+    var referenced = original;
+    var cloned = clone(original);
+
+    original.a = 20;
+
+    console.log(JSON.stringify(referenced, null, 2));
+    console.log(JSON.stringify(cloned, null, 2));
+    console.log(referenced);
+    console.log(cloned);
+
+
+    // p.200
+    // 6.8.3 전개 연산자를 사용한 배열 테크닉
+
+    // 1) shallow copy - for loop
+    var originalArray = [1,2,3,['a','b','c']];
+    var newArray = [];
+    for (let i in originalArray) {
+      newArray[i] = originalArray[i];
+    }
+    originalArray[0] = 120;
+    originalArray[3][0] = 'aa';
+    console.log(originalArray);
+    console.log(newArray);
+
+    // 2) shallow copy - 전개 연산자
+    var originalArray = [1,2,3,['a','b','c']];
+    var newArray = [...originalArray];
+    originalArray[0] = 120;
+    originalArray[3][0] = 'aa';
+    console.log(originalArray);
+    console.log(newArray);
+
+
+
+    // p.203
+    // NOTE_ 바벨을 활용할 때의 객체 복제
+    const originalObject = {
+      name: '윤인성',
+      birthDay: new Date(2016, 12 - 1, 9).toString()
+    };
+
+    const newObject = {...originalObject};
+
+    console.log(originalObject);
+    console.log(newObject);
+
+
+    // p.204
+    // [PRACTICE 01]
+    let bookObject = {
+      이름: "Nature of Code",
+      가격: "30000원",
+      저자: "다니엘 쉬프만",
+      ISBN: 9788968481901,
+      페이지수: "620페이지"
+    }
+
+    console.log(bookObject);
+    console.log(JSON.stringify(bookObject, null, 2));
+
+
+    // [PRACTICE 02]
+    starcraftUnitArray = [];
+    function makeUnitObject(name, mineral, gas, supply) {
+      let willReturn = {
+        이름: name,
+        미네랄: mineral,
+        가스: gas,
+        보급품: supply
+      };
+      return willReturn;
+    }
+    starcraftUnitArray.push(makeUnitObject('일벌레', 50, 0, 1));
+    starcraftUnitArray.push(makeUnitObject('여왕', 150, 0, 2));
+    starcraftUnitArray.push(makeUnitObject('바퀴', 75, 25, 2));
+    starcraftUnitArray.push(makeUnitObject('히드라디스크', 100, 50, 2));
+    starcraftUnitArray.push(makeUnitObject('타락귀', 150, 100, 2));
+    console.log(starcraftUnitArray);
+
+
+    // [PRACTICE 03]
+    let object = {
+      '+': 1,
+      '-': 2,
+      '*': 3,
+      '/': 4
+    };
+    console.log(object['+']);
+    console.log(object['-']);
+    console.log(object['*']);
+    console.log(object['/']);
+
+
+    // [PRACTICE 04]
+    let me = {
+      name: 'Clark',
+      hobby: null,
+      school: null,
+      money: 0
+    };
+    console.log(JSON.stringify(me, null, 2));
+
+
+  </script>
+
+</head>
+<body>
+  Hello JS!
+</body>
+</html>
