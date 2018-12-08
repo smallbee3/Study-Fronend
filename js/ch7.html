@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script>
+    function Student() {
+
+    }
+
+    var student = new Student();
+    console.log(student)
+
+
+    // p.191
+    // [code 6-26]
+    function makeStudent(name, korean, math, english, science) {
+      var willReturn = {
+        이름: name,
+        국어: korean,
+        수학: math,
+        영어: english,
+        과학: science,
+        getSum: function () {
+          return this.국어 + this.수학 + this.영어 + this.과학;
+        },
+        getAverage: function () {
+          return this.getSum() / 4;
+        },
+        toString: function () {
+          return this.이름 + '\t' + this.getSum() + '\t' + this.getAverage() + '\n';
+        }
+      };
+      return willReturn
+    }
+
+    var students = []
+    students.push(makeStudent('윤인성', 87, 98, 88, 95))
+    students.push(makeStudent('연하진', 92, 98, 88, 95))
+    students.push(makeStudent('구지연', 76, 98, 88, 95))
+    students.push(makeStudent('나선주', 98, 98, 88, 95))
+    students.push(makeStudent('윤아린', 95, 98, 88, 95))
+    students.push(makeStudent('윤명월', 64, 98, 88, 95))
+    students.push(makeStudent('김미화', 82, 98, 88, 95))
+    students.push(makeStudent('김연화', 88, 98, 88, 95))
+    students.push(makeStudent('박아현', 97, 98, 88, 95))
+    students.push(makeStudent('서준서', 45, 98, 88, 95))
+    console.log(students);
+
+    // var output = '이름\t총점\t평균\n';
+    // for (var i in students) {
+    //     output += students[i].toString();
+    // }
+    // console.log(output);
+
+
+    // p.211
+    // [code 7-5]
+    function Student(name, korean, math, english, science) {
+        this.이름 = name;
+        this.국어 = korean;
+        this.수학 = math;
+        this.영어 = english;
+        this.과학 = science;
+        this.getSum = function () {
+          return this.국어 + this.수학 + this.영어 + this.과학;
+        };
+        this.getAverage = function () {
+          return this.getSum() / 4;
+        };
+        this.toString = function () {
+          return this.이름 + '\t' + this.getSum() + '\t' + this.getAverage() + '\n';
+        };
+    }
+    var students = []
+    students.push(new Student('윤인성', 87, 98, 88, 95));
+    students.push(new Student('연하진', 92, 98, 88, 95));
+    students.push(new Student('구지연', 76, 98, 88, 95));
+    students.push(new Student('나선주', 98, 98, 88, 95));
+    students.push(new Student('윤아린', 95, 98, 88, 95));
+    students.push(new Student('윤명월', 64, 98, 88, 95));
+    students.push(new Student('김미화', 82, 98, 88, 95));
+    students.push(new Student('김연화', 88, 98, 88, 95));
+    students.push(new Student('박아현', 97, 98, 88, 95));
+    students.push(new Student('서준서', 45, 98, 88, 95));
+    console.log(students);
+    var output = '이름\t총점\t평균\n';
+    for (var i in students) {
+        output += students[i].toString();
+    }
+    console.log(output);
+
+
+    // [code 7-8]
+    function Student2(name, korean, math, english, science) {
+        this.이름 = name;
+        this.국어 = korean;
+        this.수학 = math;
+        this.영어 = english;
+        this.과학 = science;
+    }
+    var students = []
+    students.push(new Student2('윤인성', 87, 98, 88, 95));
+    students.push(new Student2('연하진', 92, 98, 88, 95));
+    students.push(new Student2('구지연', 76, 98, 88, 95));
+    students.push(new Student2('나선주', 98, 98, 88, 95));
+    students.push(new Student2('윤아린', 95, 98, 88, 95));
+    students.push(new Student2('윤명월', 64, 98, 88, 95));
+    students.push(new Student2('김미화', 82, 98, 88, 95));
+    students.push(new Student2('김연화', 88, 98, 88, 95));
+    students.push(new Student2('박아현', 97, 98, 88, 95));
+    students.push(new Student2('서준서', 45, 98, 88, 95));
+    console.log(students);
+
+    Student2.prototype.getSum = function () { return this.국어 + this.수학 + this.영어 + this.과학; };
+    Student2.prototype.getAverage = function () { return this.getSum() / 4; };
+    Student2.prototype.toString = function () { return this.이름 + '\t' + this.getSum() + '\t' + this.getAverage() + '\n'; };
+
+    var output = '이름\t총점\t평균\n';
+    for (var i in students) {
+        output += students[i].toString();
+    }
+    console.log(output);
+
+
+
+    // [code 7-6]
+    var student = new Student('윤아린', 95, 98, 88, 95)
+
+    console.log(student instanceof Student);
+    console.log(student instanceof Student2);
+    console.log(student instanceof Number);
+    console.log(student instanceof String);
+    console.log(student instanceof Boolean);
+
+
+    // [code 7-9]
+    // with "new" keyword
+    function Constructor(value) {
+      this.value = value;
+    }
+    var constructor = new Constructor('Hello');
+    console.log(constructor.value);
+
+
+    // [code 7-10]
+    // without "new" keyword
+    function Constructor2(value) {
+      this.value = value;
+    }
+    var constructor2 = Constructor2('Hello');
+    // console.log(constructor2.value); // -> TypeError: Cannot read property 'value' of undefined
+    console.log(value);
+
+
+
+
+
+
+    // [code 7-11]
+    function Rectangle(width, height) {
+      this.width = width;
+      this.height = height;
+    }
+
+    Rectangle.prototype.getArea = function () {
+      return this.width * this.height;
+    };
+    var rectangle = new Rectangle(5, 7);
+    console.log('AREA: ' + rectangle.getArea());
+
+
+    // [code 7-12]
+    rectangle.width = -2;
+    console.log('AREA: ' + rectangle.getArea());
+
+
+
+    // [code 7-13,14]
+    function Rectangle2(w, h) {
+      // var width = w;
+      // var height = h;
+      let width = w;
+      let height = h;
+
+      this.getWidth = function () { return width; };
+      this.getHeight = function () { return height; };
+      this.setWidth = function (w) {
+        if (w < 0) {
+          throw 'the width should be positive!';
+        } else { width = w; };
+      };
+      this.setHeight = function (h) {
+        if (h < 0) {
+          throw 'the height should be positive!';
+        }
+        else { height = h; };
+      };
+    }
+
+    // p.219
+    // "이제 외부에서는 지역 변수 width와 height를 사용할 수 없고 오직 getOO() 형태의 메서드와 setOO() 형태의 메서드를 사용해야 합니다."
+    // console.log(width); // -> ReferenceError: width is not defined
+    // console.log(height); // -> ReferenceError: height is not defined
+
+    Rectangle2.prototype.getArea = function() {
+      return this.getWidth() * this.getHeight();
+    };
+
+    var rectangle2 = new Rectangle2(5, 7);
+    // rectangle2.setWidth(-2);
+    rectangle2.setWidth(2);
+    console.log(rectangle2.getWidth());
+    console.log('AREA: ' + rectangle2.getArea());
+
+    // rectangle2.setHeight(-1);
+    rectangle2.setHeight(1);
+    console.log(rectangle2.getHeight());
+    console.log('AREA: ' + rectangle2.getArea());
+    // console.log(rectangle2.getArea();); //-> SyntaxError: missing ) after argument list
+    // alert(rectangle2.getArea();); // -> SyntaxError: missing ) after argument list
+
+
+
+    //  [code 7-16]
+    function Square(length) {
+      this.base = Rectangle2;
+      this.base(length, length);
+    }
+
+    Square.prototype = Rectangle2.prototype;
+    Square.prototype.constructor = Square;
+
+    var square = new Square(3);
+    console.log(square);
+    console.log('SQUARE AREA: ' + square.getArea());
+
+    <!-- p.224 This doesn't work! -->
+    console.log(square.constructor());
+
+    // [code 7-18]
+    console.log(square instanceof Square);
+    console.log(square instanceof Rectangle2);
+
+
+
+
+    // [code 7-19]
+
+    // 1) constructor function
+    function Rectangle3(width, height) {
+      this.width = width;
+      this.height = height;
+
+      // getter & setter
+      this.getWidth = function () { return width; };
+      this.getHeight = function () { return height; };
+      this.setWidth = function (w) {
+        if (w < 0) {
+          throw 'the width should be positive!';
+        } else { width = w; };
+      };
+      this.setHeight = function (h) {
+        if (h < 0) {
+          throw 'the height should be positive!';
+        }
+        else { height = h; };
+      };
+    }
+
+    // method
+    Rectangle3.prototype.getArea = function() {
+      return this.width * this.height;
+    };
+
+    var rectangle = new Rectangle3(100, 300);
+    console.log(rectangle);
+    console.log(rectangle.getArea());
+
+
+
+    // 2) class
+    class Rectangle4 {
+      constructor(width, height) {
+        this._width = width;
+        this._height = height;
+      }
+      // getter
+      get width() {
+        return this._width;
+      }
+      get height() {
+        return this._height;
+      }
+      // setter
+      set width(input) {
+        this._width = input;
+      }
+      set height(input) {
+        this._height = input;
+      }
+      // method
+      getArea() {
+        return this._width * this._height;
+      }
+    }
+    var rectangle = new Rectangle4(100,400);
+    console.log(rectangle);
+    console.log('BEFORE WIDTH: ' + rectangle.width);
+    console.log('BEFORE AREA: ' + rectangle.getArea());
+
+
+    // [code 7-21]
+    rectangle.width = 200;
+    console.log('AFTER WIDTH: ' + rectangle.width);
+    console.log('AFTER AREA: ' + rectangle.getArea());
+
+
+    // [code 7-22]
+    class Square2 extends Rectangle4 {
+      constructor(length) {
+        super(length, length);
+        console.log(this);
+      }
+      set width(input) {
+        this._width = input;
+        this._height = input;
+      }
+      set height(input) {
+        this._width = input;
+        this._height = input;
+      }
+    }
+
+    const square2 = new Square2(100);
+    console.log(square2);
+    console.log(square2.width);
+    console.log(square2._width);
+    console.log(square2.getArea());
+
+
+    // [PRACTICE 01]
+    function Product(name, weight, price) {
+      this.name = name;
+      this.weight = weight;
+      this.price = price;
+      this.getName = function() { return this.name }
+      this.getWeight = function() { return this.weight }
+      this.getPrice = function() { return this.price }
+      this.setName = function(input) {
+        if (typeof(input) != 'string') {
+          throw 'Input string data!';
+        } else { this.name = input; };
+      }
+      this.setWeight = function(input) {
+        if (input < 0) {
+          throw 'Input positive number!';
+        } else { this.weight = input; };
+      }
+      this.setPrice = function(input) {
+        if (input < 0) {
+          throw 'Input positive number!';
+        } else { this.price = input; };
+      }
+    }
+
+    Product.prototype.calculate = function(input) {
+      return (input / this.weight) * this.price;
+    }
+
+    product = new Product('돼지삼겹살', 100, 1690);
+    console.log('CALCULATOR: ' + product.calculate(200));
+
+
+    // [PRACTICE 02]
+    let number= 273;
+    number.print = function() {
+      console.log(this);
+    };
+
+    number.print();
+    // number.print();
+    // number.print();
+
+    // [PRACTICE 03]
+    // (3)
+
+    // [PRACTICE 04]
+    // (2)
+
+
+  </script>
+</head>
+<body>
+  Hello Constructor!
+</body>
+</html>
