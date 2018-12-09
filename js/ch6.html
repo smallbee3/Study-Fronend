@@ -11,26 +11,27 @@
     // p.172
     // [code 6-3]
     var product = {
-      제품명: '7D 건조 망고',
-      유형: '당절임',
+      제1품명: '7D 건조 망고',
+      유형2: '당절임',
       성분: '망고, 설탕, 메타중아황산나트륨, 치자황색소',
       원산지: '필리핀',
       '테스트 space': '테스트 space',
       123: '숫자'
     };
 
-    console.log(product.제품명);
-    console.log(product.유형);
+    console.log(product.제1품명);
+    console.log(product.유형2);
+    // console.log(product[제품명]); // -> ReferenceError: 제품명 is not defined
     // console.log(product['제품명']);
     // console.log(product['유형']);
 
     // p.174
     // console.log(product.'테스트 space'); // error
     console.log(product['테스트 space']);
-    // console.log(producct.123);    // error - ncaught SyntaxError: missing ) after argument list
-    // console.log(producct.'123');    // error - Uncaught SyntaxError: Unexpected string
-    // console.log(producct['123']); // error - Uncaught ReferenceError: producct is not defined
-    // console.log(producct[123]); // error - Uncaught ReferenceError: producct is not defined
+    // console.log(producct.123);    // -> SyntaxError: missing ) after argument list
+    // console.log(producct.'123');    // -> SyntaxError: Unexpected string
+    // console.log(producct['123']); // -> ReferenceError: producct is not defined
+    // console.log(producct[123]); // -> ReferenceError: producct is not defined
 
     // p.175
     // [code 6-7]
@@ -278,10 +279,37 @@
     console.log(cloned);
 
 
+    // 181209
+    // clone method upgrade
+    function clone2(obj) {
+      if (!(obj instanceof Object)) { throw "Input 'object' type data!"; }
+      else if (obj instanceof Array) { var output2 = []; }
+      else { var output2 = {}; }
+
+      for (var i in obj){
+        output2[i] = obj[i];
+      }
+      return output2;
+    }
+
+    var original = [1,2,3,['a', 'b']];
+    var referenced = original;
+    var cloned = clone2(original);
+
+    original[0] = 10;
+    original[3][0] = 'aa';
+
+    // console.log(JSON.stringify(referenced, null, 2));
+    // console.log(JSON.stringify(cloned, null, 2));
+    console.log(referenced);
+    console.log(cloned);
+
+
     // p.200
     // 6.8.3 전개 연산자를 사용한 배열 테크닉
 
-    // 1) shallow copy - for loop
+    // 1) Deeo copy - for loop
+    console.log('shallow copy');
     var originalArray = [1,2,3,['a','b','c']];
     var newArray = [];
     for (let i in originalArray) {
@@ -292,7 +320,16 @@
     console.log(originalArray);
     console.log(newArray);
 
-    // 2) shallow copy - 전개 연산자
+    // 2) Deep copy - clone method (defined above)
+    var originalArray = [1,2,3,['a','b','c']];
+    var newArray = clone(originalArray);
+
+    originalArray[0] = 120;
+    originalArray[3][0] = 'aa';
+    console.log(originalArray);
+    console.log(newArray);
+
+    // 3) Deep copy - 전개 연산자
     var originalArray = [1,2,3,['a','b','c']];
     var newArray = [...originalArray];
     originalArray[0] = 120;
