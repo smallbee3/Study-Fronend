@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script>
+
+    // [code 8-3]
+    var primitiveNumber = 273;
+    var objectNumber = new Number(273);
+
+    Number.prototype.method = function() {
+      return 'Method on Prototype';
+    };
+
+    var output = '';
+    output += primitiveNumber.method() + '\n';
+    output += objectNumber.method();
+    console.log(output);
+
+
+    // [code 8-4]
+    // hasOwnProperty() & propertyIsEnumerable()
+    var object = {property: 273};
+    var output = '';
+
+    output += "HOP('property'): " + object.hasOwnProperty('property') + '\n';
+    output += "HOP('constructor'): " + object.hasOwnProperty('constructor') + '\n';
+    // object has constructor method but it is not property, so this will be false
+
+    output += "PIE('property'): " + object.hasOwnProperty('property') + '\n';
+    output += "PIE('constructor'): " + object.hasOwnProperty('constructor');
+    console.log(output);
+
+    for (var key in object) {
+      console.log(object[key]);
+    }
+
+
+    // [code 8-5]
+    // toString()
+    var object = new Object();
+
+    console.log(object);    // -> {}
+    console.log(object.toString());  // -> [object Object]
+    console.log('object : ' + object);  // -> [object Object]
+    console.log('object.toString() : ' + object.toString());  // -> [object Object]
+
+    // [code 8-6]
+    var student = {
+      name: '윤명월',
+      grade: '대학교 1학년',
+      toString: function() {
+        return this.name + ' : ' + this.grade;
+      }
+    };
+    console.log(student); // -> {name: "윤명월", grade: "대학교 1학년", toString: ƒ}
+    alert(student); // -> "윤명월 : 대학교 1학년"
+
+
+    // [code 8-7]
+    // The problem of 'typeof' operator
+    var numberFromLiteral = 273;
+    var numberFromObject = new Number(273);
+
+    var output = '';
+    output += typeof(numberFromLiteral) + '\n';
+    output += typeof(numberFromObject);
+    console.log(output);
+
+
+    // [code 8-9]
+    // Comparison through 'constructor'
+    var numberFromLiteral = 273;
+    var numberFromObject = new Number(273);
+
+    if (numberFromLiteral.constructor == Number) {
+      console.log('numberFromLiteral은 숫자입니다.');
+    }
+    if (numberFromObject.constructor == Number) {
+      console.log('numberFromLiteral은 숫자입니다.');
+    }
+
+
+    // [code 8-10]
+    Object.prototype.test = function() {
+      console.log(this);
+      // alert(this);
+    }
+    var number = 273;
+    number.test();
+
+    // [code 8-11]
+    var numberFromLiteral = 273;
+    var numberFromConstructor = new Number(273);
+
+    console.log(typeof(numberFromLiteral));
+    console.log(typeof(numberFromConstructor));
+
+
+    // [code 8-12]
+    // Number Method
+
+    // 1) toFixed
+    var number = 273.5210332;
+
+    var output = ''
+    output += number.toFixed(1) + '\n';
+    output += number.toFixed(4);
+
+    console.log(number);
+    console.log(output);
+
+    // 1-2)
+    // p.246
+    // NOTE_ 직접 호출
+    var fixedNumber = (273.5210332).toFixed(2);
+    console.log(fixedNumber);
+
+
+    // 2) toExponential
+    console.log(number.toExponential(1));
+    console.log(number.toExponential(2));
+
+    // 3) toPrecision
+    console.log(number.toPrecision(1));
+    console.log(number.toPrecision(2));
+
+
+    // [code 8-14]
+    function Constructor() {}
+    Constructor.property = 273;
+    Constructor.method = function () {};
+    console.log(Constructor.property);
+    console.log(Constructor.method);
+
+
+    function test() {}
+    test.property = 1;
+    test.method = function() { console.log('hi'); };
+
+    console.log(test.property);
+    console.log(test.method);
+    console.log(test.method());
+
+
+    // 8.4 String object
+    // 8.4.1
+    // [code 8-17]
+    var stringFromLiteral = 'Hello World..!';
+    var stringFromConstructor = new String('Hello World..!');
+
+    console.log(typeof(stringFromLiteral));
+    console.log(typeof(stringFromConstructor));
+
+    // [code 8-19]
+    var string = 'abcdefg';
+    returned_string = string.toUpperCase();
+    console.log(string);
+    console.log(returned_string);
+
+
+    // 8.4.3 HTML related Method
+
+    // [code 8-21]
+    var string = 'JavaScript';
+
+    var output = '';
+    output += 'anchor: ' + string.anchor() + '<br/>';
+    output += 'big: ' + string.big() + '<br/>';
+    output += 'blink: ' + string.blink() + '<br/>';
+    output += 'bold: ' + string.bold() + '<br/>';
+    output += 'fixed: ' + string.fixed() + '<br/>';
+    output += 'fontcolor: ' + string.fontcolor('red') + '<br/>';
+    output += 'fontsize: ' + string.fontsize(15) + '<br/>';
+    output += 'italics: ' + string.italics() + '<br/>';
+    output += 'link: ' + string.link('http://hanbit.co.kr') + '<br/>';
+    output += 'small: ' + string.small() + '<br/>';
+    output += 'strike: ' + string.strike() + '<br/>';
+    output += 'sub: ' + string.sub() + '<br/>';
+    output += 'sup: ' + string.sup() + '<br/>';
+
+    console.log(output);
+    document.write(output);
+
+    // p.254
+    // NOTE_ 메서드 체이닝
+
+    // [code 8-22]
+    // without 'Method Chainning'
+    var output = 'Hello World..!';
+    output = output.toLowerCase();
+    output = output.substring(0, 10);
+    output = output.anchor('name');
+    console.log(output);
+
+    // [code 8-23]
+    // with 'Method Chainning'
+    var output = 'Hello World..!';
+    output = output.toLowerCase().substring(0, 10).anchor('name');
+    console.log(output);
+
+    
+
+  </script>
+</head>
+<body>
+  Hello Built-in Object!
+</body>
+</html>
