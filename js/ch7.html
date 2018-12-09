@@ -230,15 +230,16 @@
       this.base(length, length);
     }
 
-    Square.prototype = Rectangle2.prototype;
-    Square.prototype.constructor = Square;
+    Square.prototype = Rectangle2.prototype; // ??
+    // Square.prototype.constructor = Square.constructor; // ??
 
     var square = new Square(3);
     console.log(square);
     console.log('SQUARE AREA: ' + square.getArea());
 
-    <!-- p.224 This doesn't work! -->
-    console.log(square.constructor());
+    // p.224 This doesn't work!
+    console.log(square.constructor()); // -> undefined
+    // alert(square.constructor()); // -> undefined
 
     // [code 7-18]
     console.log(square instanceof Square);
@@ -309,12 +310,15 @@
     var rectangle = new Rectangle4(100,400);
     console.log(rectangle);
     console.log('BEFORE WIDTH: ' + rectangle.width);
+    console.log('BEFORE _WIDTH: ' + rectangle._width);
     console.log('BEFORE AREA: ' + rectangle.getArea());
 
 
     // [code 7-21]
     rectangle.width = 200;
+    rectangle._width = 100;
     console.log('AFTER WIDTH: ' + rectangle.width);
+    console.log('AFTER _WIDTH: ' + rectangle._width);
     console.log('AFTER AREA: ' + rectangle.getArea());
 
 
@@ -323,6 +327,7 @@
       constructor(length) {
         super(length, length);
         console.log(this);
+        // alert(this);
       }
       set width(input) {
         this._width = input;
@@ -336,9 +341,12 @@
 
     const square2 = new Square2(100);
     console.log(square2);
-    console.log(square2.width);
+    console.log(square2.width); // -> undefined
     console.log(square2._width);
     console.log(square2.getArea());
+
+
+
 
 
     // [PRACTICE 01]
