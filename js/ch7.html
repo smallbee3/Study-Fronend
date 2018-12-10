@@ -230,7 +230,8 @@
       this.base(length, length);
     }
 
-    Square.prototype = Rectangle2.prototype; // ??
+    Square.prototype = Rectangle2.prototype;
+    Square.prototype.constructor = Square; // ??
     // Square.prototype.constructor = Square.constructor; // ??
 
     var square = new Square(3);
@@ -239,6 +240,14 @@
 
     // p.224 This doesn't work!
     console.log(square.constructor()); // -> undefined
+    console.log(square.constructor);
+    console.log(square.constructor.isPrototypeOf(Rectangle2)); // false
+    console.log(square.constructor.isPrototypeOf(rectangle2)); // false
+    console.log(square.constructor.isPrototypeOf(Square)); // false
+    console.log(square.constructor.isPrototypeOf(square)); // false
+
+    // alert(square.constructor);
+    // console.log(square.prototype.constructor); // -> TypeError: Cannot read property 'constructor' of undefined
     // alert(square.constructor()); // -> undefined
 
     // [code 7-18]
