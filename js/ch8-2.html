@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="underscore.js"></script>
+
+  <script>
+    // p.256
+    // 8.5 Array 객체
+
+    // [code 8-25]
+    var array = ['A', 'B', 'C', 'D'];
+
+    var output = ''
+    for (var i=0; i < array.length; i++) {
+      output += i + ' : ' + array[i] + '\n';
+    }
+    console.log(output);
+
+    // [code 8-26]
+    var array = [52, 273, 103, 32];
+
+    array.sort();
+    console.log('SORTED(WRONG): ' + array);
+
+    array.reverse();
+    console.log('REVERSED: ' + array);
+
+
+    // [code 8-27]
+    var array = [52, 273, 103, 32];
+
+    array.sort(function (left, right) { return left - right; });
+    console.log('SORTED(ASC): ' + array);
+
+    array.sort(function (left, right) { return right - left; });
+    console.log('SORTED(DESC): ' + array);
+
+
+    // [code 8-28]
+    // [code 7-8]
+    function Student2(name, korean, math, english, science) {
+        this.이름 = name;
+        this.국어 = korean;
+        this.수학 = math;
+        this.영어 = english;
+        this.과학 = science;
+    }
+    var students = []
+
+    Student2.prototype.getSum = function () { return this.국어 + this.수학 + this.영어 + this.과학; };
+    Student2.prototype.getAverage = function () { return this.getSum() / 4; };
+    Student2.prototype.toString = function () { return this.이름 + '\t' + this.getSum() + '\t' + this.getAverage() + '\n'; };
+
+    students.push(new Student2('윤인성', 87, 98, 88, 95));
+    students.push(new Student2('연하진', 92, 98, 88, 95));
+    students.push(new Student2('구지연', 76, 98, 88, 95));
+    students.push(new Student2('나선주', 98, 98, 88, 95));
+    students.push(new Student2('윤아린', 95, 98, 88, 95));
+    students.push(new Student2('윤명월', 64, 98, 88, 95));
+    students.push(new Student2('김미화', 82, 98, 88, 95));
+    students.push(new Student2('김연화', 88, 98, 88, 95));
+    students.push(new Student2('박아현', 97, 98, 88, 95));
+    students.push(new Student2('서준서', 45, 98, 88, 95));
+
+    // Sorting (1)
+    // students.sort(function (left, right) {
+    //   // return left.getSum() - right.getSum();
+    //   return left.getAverage() - right.getAverage();
+    // });
+    // students = students.slice(0, 3);
+
+
+    // [code 8-30]
+    // Sorting (2) - Method Chaininig
+    students = students.sort(function (left, right) {
+      // return left.getSum() - right.getSum();
+      return left.getAverage() - right.getAverage();
+    }).slice(0, 3);
+
+
+    var output = '이름\t총점\t평균\n';
+    for (var i in students) {
+        output += students[i].toString();
+    }
+    console.log(output);
+
+
+    // p.262
+    // [code 8-31]
+    Array.prototype.remove = function (index) {
+      this.splice(index, 1);
+    }
+    students.remove(2);
+
+    console.log(output); // -> same
+
+    console.log(students); // -> changed
+    var output = '이름\t총점\t평균\n';
+    for (var i in students) {
+        output += students[i].toString();
+    }
+    console.log(output); // -> changed
+
+
+    // p.262
+    // [code 8-32]
+    var array = [52, 273, 103, 32, 274, 129];
+
+    for (var i = 0; i < array.length; i++) {
+      if (array[i] > 100) {
+        array.remove(i);
+      }
+    }
+    console.log('REMOVED(WRONG): ' + array);
+
+
+    // [My Code]
+    var array = [52, 273, 103, 32, 274, 129];
+    // 1) find the indexes of element to delete.
+    remove_list = [];
+    for (var i in array) {
+      if (array[i] > 100) {
+        remove_list.push(i);
+      }
+    }
+    // 2) Sort & reverse the remove_list
+    remove_list = remove_list.sort(function(left, right) {return left - right; }).reverse();
+    console.log('REMOVE_LIST: ' + remove_list);
+    // 3) delete the indexes using element in the remove_list
+    for (var i of remove_list) {
+      array.remove(i);
+    }
+    console.log('REMOVED(RIGHT): ' + array);
+
+
+    // [code 8-33]
+    var array = [52, 273, 103, 32, 274, 129];
+
+    for (var i = array.length - 1; i >= 0; i--) {
+      if (array[i] > 100) {
+        array.remove(i);
+      }
+    }
+    console.log('REMOVED(RIGHT)2: ' + array);
+
+
+    // [code 8-34]
+    var date = new Date();
+    console.log(date);
+
+
+    // [code 8-35]
+    var date = new Date('December 9, 1991');
+    console.log(date);
+
+    var date = new Date('December 9, 1991 02:24:23');
+    console.log(date);
+
+
+    // [code 8-36]
+    var date = new Date(1991, 11, 9);
+    console.log(date);
+
+    var date = new Date(1991, 11, 9, 2, 24, 23);
+    console.log(date);
+
+    var date = new Date(1991, 11, 9, 2, 24, 23, 12);
+    console.log(date);
+
+
+    // [code 8-37]
+    var date = new Date(2732741033257);
+    console.log(date);
+
+
+    // [code 8-38]
+    // One week later
+    var date = new Date();
+    date.setDate(date.getDate() + 7);
+    console.log('ONE WEEK LATER: ' + date)
+
+    // One hour later
+    var date = new Date();
+    date.setHours(date.getHours() + 1);
+    console.log('ONE HOUR LATER: ' + date)
+
+    // One year later(getYear)
+    var date = new Date();
+    date.setYear(date.getYear() + 1);
+    console.log('ONE YEAR LATER: ' + date)
+
+    // One year later(getFullYear)
+    var date = new Date();
+    date.setFullYear(date.getFullYear() + 1);
+    console.log('ONE YEAR LATER2: ' + date)
+
+
+    // [code 8-39]
+    var date = new Date(1991, 11, 9);
+
+    var output = '';
+    output += '★toDateString: ' + date.toDateString() + '\n';
+    output += '★toGMTString: ' + date.toGMTString() + '\n';
+    output += '★toLocaleDateString: ' + date.toLocaleDateString() + '\n';
+    output += '★toLocaleString: ' + date.toLocaleString() + '\n';
+    output += '★toLocaleTimeString: ' + date.toLocaleTimeString() + '\n';
+    output += '★toString: ' + date.toString() + '\n';
+    output += '★toTimeString: ' + date.toTimeString() + '\n';
+    output += '★toUTCString: ' + date.toUTCString() + '\n';
+    console.log(output);
+
+
+    // [code 8-40]
+    var now = new Date();
+    var before = new Date('December 9, 1991');
+
+    var interval = now.getTime() - before.getTime();
+    interval = Math.floor(interval / (1000 * 60 * 60 * 24));
+
+    console.log('Interval: ' + interval + '일');
+
+
+    // [Myway] - this : before
+    Date.prototype.getInterval = function () {
+      var now = new Date();
+      // var before = new Date('December 9, 1991');
+      var interval = now.getTime() - this.getTime();
+      interval = Math.floor(interval / (1000 * 60 * 60 * 24));
+      return interval;
+    }
+
+    var before = new Date('December 9, 2991');
+    console.log('Interval(myway): ' + before.getInterval() + '일');
+
+
+    // [code 8-41] - this : now
+    Date.prototype.getInterval = function (otherDate) {
+      // var now = new Date();
+      // var before = new Date('December 9, 1991');
+      var interval;
+      if (this > otherDate) {
+        var interval = this.getTime() - otherDate.getTime();
+      } else {
+        var interval = otherDate.getTime() - this.getTime();
+      }
+      return Math.floor(interval / (1000 * 60 * 60 * 24));
+    }
+
+    var now = new Date();
+    var before = new Date('December 9, 2991');
+    console.log('Interval(code 8-41): ' + now.getInterval(before) + '일');
+
+
+    // [code 8-42]
+    console.log(Math.E);
+    console.log(Math.LN2);
+    console.log(Math.LN10);
+    console.log(Math.LOG2E);
+    console.log(Math.LOG10E);
+    console.log(Math.PI);
+    console.log(Math.SQRT1_2);
+    console.log(Math.SQRT2);
+
+
+    // [code 8-43]
+    var max = Math.max;
+    console.log('max: ' + max(52,273, 103, 57, 32));
+    console.log('Math.max: ' + Math.max(52,273, 103, 57, 32));
+
+
+    // [code 8-44]
+    console.log('[1,2,3]: ' + Array.isArray([1,2,3]));
+    console.log('{}: ' + Array.isArray({}));
+    console.log('1: ' + Array.isArray(1));
+
+    // p.242
+    // 8.2.3 자료형 구분
+    // [Myway]
+    var array = [1,2,3];
+    console.log('[1,2,3]: ' + array.constructor == Array);
+    console.log('[1,2,3]: ', array.constructor == Array);
+    console.log('[1,2,3]: ', array.constructor == [].constructor);
+    console.log('[1,2,3]: ', [1,2,3].constructor == [].constructor);
+
+    var object = {};
+    console.log('{}: ' + object.constructor == Array);
+    console.log('{}: ', object.constructor == Array);
+    console.log('{}: ', {}.constructor == Object);
+
+    var number = 1;
+    console.log('1: ' + number.constructor == Number);
+    console.log('1: ', number.constructor == Array);
+    console.log('1: ', (1).constructor == Number);
+
+    // [code 8-46]
+    var array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+    var sum = 0;
+    var output = '';
+    array.forEach(function (element, index, array) {
+      sum += element;
+      output += index + ': ' + element + ' -> ' + sum + '\n';
+    })
+    console.log(output);
+
+
+    // The sequence of those three parameters do matter !
+    // [test]
+    // var sum = 0;
+    // var output = '';
+    // array.forEach(function (array, element, index) {
+    //   sum += element;
+    //   output += index + ': ' + element + ' -> ' + sum + '\n';
+    // })
+    // console.log(output);
+
+
+    // [code 8-47]
+    var array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+    var output = array.map(function (element) { return element * element; });
+    console.log(output);
+
+    // [code 8-48]
+    // element
+    var array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    array = array.filter(function (element, index, array) { return element <= 5; });
+    console.log(array);
+
+    // index
+    var array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    array = array.filter(function (element, index, array) { return index <= 3; });
+    console.log(array);
+
+    // index
+    var array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    array = array.filter(function (element, index, array) { return array[0] <= 1; });
+    console.log(array);
+
+
+    // [code 8-49]
+    var array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+    function lessThanFive(element, index, array) { return element < 5; };
+    function lessThanTwenty(element, index, array) { return element < 20; };
+
+    var output1 = array.every(lessThanFive);
+    var output2 = array.every(lessThanTwenty);
+    var output3 = array.some(lessThanFive);
+    var output4 = array.some(lessThanTwenty);
+
+    var output = '';
+    output += 'output1: ' + output1 + '\n';
+    output += 'output2: ' + output2 + '\n';
+    output += 'output3: ' + output3 + '\n';
+    output += 'output4: ' + output4 + '\n';
+    console.log(output);
+
+    // [Myway]
+    var output = '';
+    var output5 = array.every(function (element, index, array) { return element < 5; });
+    var output6 = array.some(function (element, index, array) { return element < 5; });
+    output += 'output5: ' + output5 + '\n';
+    output += 'output6: ' + output6 + '\n';
+    console.log(output);
+
+
+    // [code 8-50] - reduce
+    var array = [1, 2, 3, 4, 5];
+    var output = '';
+    array.reduce(function (previousValue, currentValue, index, array) {
+      output += previousValue + ' : ' + currentValue + ' : ' + index + '\n';
+    });
+    console.log(output);
+
+
+    // [code 8-50] - reduceRight
+    var array = [1, 2, 3, 4, 5];
+    var output = '';
+    array.reduceRight(function (previousValue, currentValue, index, array) {
+      output += previousValue + ' : ' + currentValue + ' : ' + index + '\n';
+    });
+    console.log(output);
+
+
+    // [code 8-51] - reduce
+    var array = [1, 2, 3, 4, 5];
+    var result = array.reduce(function (previousValue, currentValue) {
+      // console.log(previousValue + currentValue);
+      console.log(previousValue, currentValue);
+      return previousValue + currentValue;
+    });
+    console.log('result: ' + result);
+
+    // [code 8-51] - reduceRight
+    var array = [1, 2, 3, 4, 5];
+    var result = array.reduceRight(function (previousValue, currentValue) {
+      console.log(previousValue, currentValue);
+      return previousValue + currentValue;
+    });
+    console.log('result: ' + result);
+
+
+    var text = '   text   ';
+    output = text.trim();
+    console.log(output);
+
+
+    // [code 8-53]
+    var object = {
+      name: '윤인성',
+      region: '서울특별시'
+    };
+    console.log(JSON.stringify(object));
+
+
+    // [code 8-54]
+    var object = {
+      name: '윤인성',
+      region: '서울특별시'
+    };
+
+    var copy = JSON.parse(JSON.stringify(object));
+    console.log(copy.name + ' : ' + copy.region);
+    console.log(copy['name'] + ' : ' + copy['region']);
+
+
+    // [code 8-55]
+    var object = {
+      name: 'object',
+      prop: 'object',
+      toJSON: function() {
+        // return { custom: 'custom'};
+        return { 1: 'haha'};
+      }
+    };
+    console.log(JSON.stringify(object));
+
+
+    // [code 8-56] - 일반적인 배열 메서드 사용
+    var students = [
+      {이름: '윤인성', 국어: 87, 수학: 98, 영어: 88, 과학: 95},
+      {이름: '연하진', 국어: 92, 수학: 98, 영어: 88, 과학: 95},
+      {이름: '구지연', 국어: 76, 수학: 98, 영어: 88, 과학: 95},
+      {이름: '나선주', 국어: 98, 수학: 98, 영어: 88, 과학: 95},
+      {이름: '윤아린', 국어: 95, 수학: 98, 영어: 88, 과학: 95},
+      {이름: '윤명월', 국어: 64, 수학: 98, 영어: 88, 과학: 95},
+      {이름: '김미화', 국어: 82, 수학: 98, 영어: 88, 과학: 95},
+      {이름: '김연화', 국어: 88, 수학: 98, 영어: 88, 과학: 95},
+      {이름: '박아현', 국어: 97, 수학: 98, 영어: 88, 과학: 75},
+      {이름: '서준서', 국어: 45, 수학: 98, 영어: 88, 과학: 85}
+    ];
+
+    var filteredA = students.filter(function (item) { return item.과학 > 90; });
+    console.log(filteredA);
+
+    var filteredB = students.filter(function (item) { return ((item.국어 + item.수학 + item.영어 + item.과학) / 4) > 90; });
+    console.log(filteredB);
+
+
+    // [code 8-57]
+    var filteredA = students.filter((item) => item.과학 > 90);
+    console.log(filteredA);
+
+    var filteredB = students.filter((item) => ((item.국어 + item.수학 + item.영어 + item.과학) / 4) > 90 );
+    console.log(filteredB);
+
+
+    // [code 8-59]
+    var sortByScience = _.sortBy(students, function (item) {
+      return item.과학;
+    }).slice(0, 3);
+    console.log(JSON.stringify(sortByScience, null, 2));
+
+
+    var sortByAverage = _.sortBy(students, function (item) {
+      return (item.국어 + item.수학 + item.영어 + item.과학) / 4;
+    }).slice(0, 3);
+    console.log(JSON.stringify(sortByAverage, null, 2));
+
+    var scienceTop = _.max(students, function (item) { return item.과학; })
+    console.log(JSON.stringify(scienceTop, null, 2));
+
+    // [PRACTICE 01]
+    var string = 'hello world..!';
+
+    string = string.toUpperCase();
+    console.log(string);
+
+    string = string.toLowerCase();
+    console.log(string);
+
+    // [PRACTICE 02]
+
+    // [PRACTICE 03]
+
+    // [PRACTICE 04]
+
+
+
+  </script>
+</head>
+<body>
+  Hello Built-in Object2!
+</body>
+</html>
