@@ -6,7 +6,6 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <script src="underscore.js"></script>
-
   <script>
     // p.256
     // 8.5 Array 객체
@@ -14,7 +13,7 @@
     // [code 8-25]
     var array = ['A', 'B', 'C', 'D'];
 
-    var output = ''
+    var output = '';
     for (var i=0; i < array.length; i++) {
       output += i + ' : ' + array[i] + '\n';
     }
@@ -49,7 +48,7 @@
         this.영어 = english;
         this.과학 = science;
     }
-    var students = []
+    var students = [];
 
     Student2.prototype.getSum = function () { return this.국어 + this.수학 + this.영어 + this.과학; };
     Student2.prototype.getAverage = function () { return this.getSum() / 4; };
@@ -181,22 +180,22 @@
     // One week later
     var date = new Date();
     date.setDate(date.getDate() + 7);
-    console.log('ONE WEEK LATER: ' + date)
+    console.log('ONE WEEK LATER: ' + date);
 
     // One hour later
     var date = new Date();
     date.setHours(date.getHours() + 1);
-    console.log('ONE HOUR LATER: ' + date)
+    console.log('ONE HOUR LATER: ' + date);
 
     // One year later(getYear)
     var date = new Date();
     date.setYear(date.getYear() + 1);
-    console.log('ONE YEAR LATER: ' + date)
+    console.log('ONE YEAR LATER: ' + date);
 
     // One year later(getFullYear)
     var date = new Date();
     date.setFullYear(date.getFullYear() + 1);
-    console.log('ONE YEAR LATER2: ' + date)
+    console.log('ONE YEAR LATER2: ' + date);
 
 
     // [code 8-39]
@@ -222,6 +221,14 @@
     interval = Math.floor(interval / (1000 * 60 * 60 * 24));
 
     console.log('Interval: ' + interval + '일');
+    // [code 8-40] (2) 2991
+    var now = new Date();
+    var before = new Date('December 9, 2991');
+
+    var interval = now.getTime() - before.getTime();
+    interval = Math.floor(interval / (1000 * 60 * 60 * 24));
+
+    console.log('Interval2: ' + interval + '일');
 
 
     // [Myway] - this : before
@@ -290,11 +297,13 @@
     console.log('{}: ' + object.constructor == Array);
     console.log('{}: ', object.constructor == Array);
     console.log('{}: ', {}.constructor == Object);
+    console.log('{}: ', {}.constructor == {}.constructor);
 
     var number = 1;
     console.log('1: ' + number.constructor == Number);
     console.log('1: ', number.constructor == Array);
     console.log('1: ', (1).constructor == Number);
+    console.log('1: ', (1).constructor == (0).constructor);
 
     // [code 8-46]
     var array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -318,12 +327,28 @@
     // })
     // console.log(output);
 
+    // ReferenceError: element is not defined
+    // [test2]
+    // var sum = 0;
+    // var output = '';
+    // array.forEach(function (index, array) {
+    //   sum += element;
+    //   output += index + ': ' + element + ' -> ' + sum + '\n';
+    // })
+    // console.log(output);
+
 
     // [code 8-47]
     var array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
     var output = array.map(function (element) { return element * element; });
     console.log(output);
+
+    // [code 8-47] (2)
+    var array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    var output = array.map(function (element, index, array) { return element * element / (index + 1); });
+    console.log(output);
+
+
 
     // [code 8-48]
     // element
@@ -485,24 +510,33 @@
     var scienceTop = _.max(students, function (item) { return item.과학; })
     console.log(JSON.stringify(scienceTop, null, 2));
 
+
     // [PRACTICE 01]
     var string = 'hello world..!';
 
-    string = string.toUpperCase();
+    string.toUpperCase();
     console.log(string);
-
-    string = string.toLowerCase();
+    string.toLowerCase();
     console.log(string);
 
     // [PRACTICE 02]
+    string = string.toUpperCase();
+    console.log(string);
+    string = string.toLowerCase();
+    console.log(string);
 
     // [PRACTICE 03]
+    // (1)
 
     // [PRACTICE 04]
+    // trim()
 
+    // [PRACTICE 05]
+    // p.829
 
 
   </script>
+  <!-- <script src="underscore.js"></script> -->
 </head>
 <body>
   Hello Built-in Object2!
