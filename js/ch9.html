@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script>
+    // [code 9-1]
+    var output = '';
+    for (var key in window) {
+      output += '●' + key + ': ' + window[key] + '\n';
+    }
+    console.log(output);
+
+
+    // [code 9-2]
+    // window.open();
+
+
+    // [code 9-3]
+    // window.open('http://hanbit.co.kr', 'child', 'width=600, height=300', true);
+
+
+    // [code 9-4]
+    // var child = window.open('', '', 'width=300, height=200');
+    // child.document.write('<h1>From Parent Window</h1>');
+
+
+    // [code 9-5]
+    // var child = window.open('', '', 'width=300, height=200');
+    // if (child) {
+    //   child.document.write('<h1>From Parent Window</h1>');
+    // } else {
+    //   alert('팝업 차단을 해제해주세요.');
+    // }
+
+
+    // [code 9-6]
+    // var child = window.open('', '', 'width=300, height=200');
+    // child.moveTo(0, 0);
+    //
+    // setInterval(function () {
+    //   child.moveBy(10, 10);
+    // }, 1000);
+
+
+    // [code 9-7]
+    var output = '';
+    for (var key in screen) {
+      output += '▲' + key + ': ' + screen[key] + '\n';
+    }
+    console.log(output);
+
+
+    // [code 9-8]
+    // var child = window.open('', '', 'width=300, height=200');
+    // var width = screen.width;
+    // var height = screen.height;
+    //
+    // child.moveTo(0, 0);
+    // child.resizeTo(width, height);
+    //
+    // setInterval(function () {
+    //   child.resizeBy(-20, -20);
+    //   child.moveBy(10, 10);
+    // }, 1000);
+
+
+    // [code 9-9]
+    var output = '';
+    for (var key in location) {
+      output += '●' + key + ': ' + location[key] + '\n';
+    }
+    console.log(output);
+
+
+    // p.305
+    // (1)
+    // location = 'http://hanbit.co.kr';
+    // (2)
+    // location.href = 'http://hanbit.co.kr';
+    // (3)
+    // location.assign('http://hanbit.co.kr');
+    // (4)
+    // location.replace('http://hanbit.co.kr');
+
+
+
+    // p.305 (2)
+    // This will make infinite loop !
+
+    // (1)
+    // location = location;
+    // (2)
+    // location.href = location.href;
+    // (3)
+    // location.assign(location);
+    // (4)
+    // location.replace(location);
+    // (5)
+    // location.reload();
+
+
+    // p.306
+    // [code 9-10]
+    var output = '';
+    for (var key in navigator) {
+      output += '◼︎' + key + ': ' + navigator[key] + '\n';
+    }
+    console.log(output);
+
+
+    // p.307
+    // [code 9-11]
+    window.onload = function () {
+
+    };
+
+
+    // p.311
+    // [code 9-14]
+    var audio = new Audio("Kalimba.mp3");
+
+
+    // [code 9-14]
+    var audio = new Audio();
+    audio.src = "Kalimba.mp3";
+
+
+    // [code 9-17]
+    var userAgent = navigator.userAgent;
+    console.log(userAgent);
+
+
+    // p.317
+    // [PRACTICE 01]
+    // (1)
+
+    // [PRACTICE 02]
+    var URL = 'https://www.facebook.com/share.php?u=https://www.facebook.com/groups/awskrug/';
+    // var URL = 'https://www.facebook.com/share.php?u=' + encodeURIComponent('https://www.facebook.com/groups/awskrug/');
+    // window.open(URL, 'child', 'width=500, height=500', true);
+    window.open(URL, 'child', 'width=500, height=500', false);
+
+
+    // [PRACTICE 03]
+    // -
+
+
+
+  </script>
+
+</head>
+<body>
+  <button onclick="audio.play()">PLAY</button>
+  <button onclick="audio.pause()">PAUSE</button>
+  <input type="number" onchange="audio.currentTime=this.value"/>
+  <input type="number" onchange="audio.volume=this.value"/>
+</body>
+</html>
