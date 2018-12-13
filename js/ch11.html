@@ -1,0 +1,359 @@
+
+<!-- p.361 -->
+<!-- [code 11-3,4,5] -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>
+    window.onload = function() {
+      var header = document.getElementById('header');
+
+      header.onclick = function () {
+        alert('CLICK');
+
+        // 이벤트 제거
+        header.onclick = null;
+      };
+    };
+
+  </script>
+</head>
+<body>
+  <h1 id='header'>Click</h1>
+</body>
+</html> -->
+
+
+
+
+<!-- p.361 -->
+<!-- 11.4 이벤트 발생 객체와 이벤트 객체 -->
+<!-- [code 11-6,7] -->
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <script>
+        window.onload = function () {
+            document.getElementById('header').onclick = function () {
+                // alert(this);
+                this.style.color = 'orange';
+                this.style.backgroundColor =  'red';
+            };
+        };
+    </script>
+</head>
+<body>
+    <h1 id="header">Click</h1>
+</body>
+</html> -->
+
+
+
+
+<!-- [code 11-8] -->
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <script>
+        window.onload = function () {
+            document.getElementById('header').onclick = function (e) {
+                // 이벤트 객체를 설정합니다.
+                var event = e || window.event;
+                // var event = window.event;
+                // var event = e;
+                document.body.innerHTML = '';
+                for (var key in event) {
+                    document.body.innerHTML += '<p>' + key + ': ' + event[key] + '</p>';
+                }
+            };
+        };
+    </script>
+</head>
+<body>
+    <h1 id="header">Click</h1>
+</body>
+</html> -->
+
+
+
+
+<!-- p.365 -->
+<!-- 11.5 이벤트 강제 실행 -->
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <script>
+        window.onload = function () {
+            var header = document.getElementById('header')
+            header.onclick = function () {
+                alert(this);
+                // this.style.color = 'orange';
+                // this.style.backgroundColor = 'red';
+            };
+            header.onclick();
+        };
+    </script>
+</head>
+<body>
+    <h1 id="header">Click</h1>
+</body>
+</html> -->
+
+
+
+
+<!-- [Myway] -->
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <script>
+        window.onload = function () {
+
+          // 1)
+          // var button = document.getElementById('button-a');
+          // button.onclick = function () {
+          //     var header = document.getElementById('counter-a');
+          //     header.innerText = Number(header.innerText) + 1;
+          // };
+          //
+          // var button = document.getElementById('button-b');
+          // button.onclick = function () {
+          //     var headerA = document.getElementById('counter-a');
+          //     var headerB = document.getElementById('counter-b');
+          //     headerA.innerText = Number(headerA.innerText) + 1;
+          //     headerB.innerText = Number(headerB.innerText) + 1;
+          // };
+
+
+          // 2) Refactoring
+          var buttonA = document.getElementById('button-a');
+          var counterA = document.getElementById('counter-a');
+          var buttonB = document.getElementById('button-b');
+          var counterB = document.getElementById('counter-b');
+
+          buttonA.onclick = function () {
+              counterA.innerText = Number(counterA.innerText) + 1;
+          };
+
+          buttonB.onclick = function () {
+              counterA.innerText = Number(counterA.innerText) + 1;
+              counterB.innerText = Number(counterB.innerText) + 1;
+          };
+        };
+    </script>
+</head>
+<body>
+    <button id="button-a">ButtonA</button>
+    <button id="button-b">ButtonB</button>
+    <h1>Button A - <span id="counter-a">0</span></h1>
+    <h1>Button B - <span id="counter-b">0</span></h1>
+</body>
+</html> -->
+
+
+
+<!-- [code 11-9,10,11,12,13] -->
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <script>
+        window.onload = function () {
+            // 문서 객체를 가져옵니다.
+            var buttonA = document.getElementById('button-a');
+            var buttonB = document.getElementById('button-b');
+            var counterA = document.getElementById('counter-a');
+            var counterB = document.getElementById('counter-b');
+            // 이벤트를 연결합니다.
+            buttonA.onclick = function () {
+                counterA.innerHTML = Number(counterA.innerHTML) + 1;
+            };
+            buttonB.onclick = function () {
+                counterB.innerHTML = Number(counterB.innerHTML) + 1;
+
+                // p.367
+                // 하지만 코드 11-13처럼 버튼 A의 click 이벤트를 강제로 실행하는 방법이 더 간단합니다.
+                // counterA.innerHTML = Number(counterA.innerHTML) + 1;
+                buttonA.onclick();
+            };
+        };
+    </script>
+</head>
+<body>
+    <button id="button-a"> ButtonA</button>
+    <button id="button-b"> ButtonB</button>
+    <h1>Button A - <span id="counter-a">0</span></h1>
+    <h1>Button B - <span id="counter-b">0</span></h1>
+</body>
+</html> -->
+
+
+
+
+<!-- 11.6 인라인 이벤트 모델 -->
+
+<!-- [code 11-14,15,16,17] -->
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <script>
+    </script>
+</head>
+<body>
+    <h1 onclick="var alpha=10;alert(alpha);">Click</h1>
+</body>
+</html> -->
+
+
+<!-- [code 11-18] -->
+
+<!-- [Myway] -->
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <script>
+      window.onload = function () {
+        var header = document.getElementById('click');
+        header.onclick = function () {
+          var alpha=10;
+          alert(alpha);
+        };
+      };
+    </script>
+</head>
+<body>
+    <h1 id="click">Click</h1>
+</body>
+</html> -->
+
+
+<!-- [book] -->
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <script>
+      function whenClick(e) {
+        alert('클릭');
+      }
+    </script>
+</head>
+<body>
+    <h1 onclick="whenClick(event)">Click</h1>
+</body>
+</html> -->
+
+
+
+<!-- 11.7 디폴트 이벤트 제거 -->
+<!-- p.370 -->
+<!-- [code 11-19,20] -->
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <script>
+      window.onload = function () {
+        document.getElementById('my-form').onsubmit = function () {
+          return false;
+        };
+      };
+    </script>
+</head>
+<body>
+    <form id="my-form">
+      <label for="name">이름</label><br>
+      <input type="text" name="name" id="name"><br>
+
+      <label for="name">비밀번호</label><br>
+      <input type="password" name="pass" id="pass"><br>
+
+      <label for="pass-check">비밀번호 확인</label><br>
+      <input type="password" id="pass=check"><br>
+
+      <input type="submit" value="제출"><br>
+    </form>
+</body>
+</html> -->
+
+
+
+<!-- p.371 -->
+<!-- [code 11-21] -->
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <script>
+      window.onload = function () {
+        document.getElementById('my-form').onsubmit = function () {
+          var pass = document.getElementById('pass');
+          var passCheck = document.getElementById('pass-check');
+          if (pass.value == passCheck.value) {
+            alert('성공')
+            // return true;
+          } else {
+            alert('비밀번호가 일치하지 않습니다.')
+            return false;
+          }
+        };
+      };
+    </script>
+</head>
+<body>
+    <form id="my-form">
+      <label for="name">이름</label><br>
+      <input type="text" name="name" id="name"><br>
+
+      <label for="pass">비밀번호</label><br>
+      <input type="password" name="pass" id="pass"><br>
+
+      <label for="pass-check">비밀번호 확인</label><br>
+      <input type="password" id="pass-check"><br>
+
+      <input type="submit" value="제출"><br>
+    </form>
+</body>
+</html> -->
+
+
+
+<!-- p.372 -->
+<!-- [code 11-22] -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+      function whenSubmit() {
+        var pass = document.getElementById('pass');
+        var passCheck = document.getElementById('pass-check');
+        if (pass.value == passCheck.value) {
+          alert('성공')
+          // return true;
+        } else {
+          alert('비밀번호가 일치하지 않습니다.')
+          return false;
+        }
+      }
+    </script>
+</head>
+<body>
+    <form onsubmit="return whenSubmit()">
+      <label for="name">이름</label><br>
+      <input type="text" name="name" id="name"><br>
+
+      <label for="pass">비밀번호</label><br>
+      <input type="password" name="pass" id="pass"><br>
+
+      <label for="pass-check">비밀번호 확인</label><br>
+      <input type="password" id="pass-check"><br>
+
+      <input type="submit" value="제출"><br>
+    </form>
+</body>
+</html>
