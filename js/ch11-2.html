@@ -1,0 +1,92 @@
+
+<!-- p.373 -->
+<!-- 11.8 이벤트 전달 -->
+
+
+
+<!-- [code 11-23] -->
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <style>
+        * { border: 3px solid black; }
+    </style>
+    <script>
+    </script>
+</head>
+<body>
+    <div onclick="alert('outer-div')">
+        <div onclick="alert('inner-div')">
+            <h1 onclick="alert('header')">
+                <p onclick="alert('paragraph')">Paragraph</p>
+            </h1>
+        </div>
+    </div>
+</body>
+</html> -->
+
+
+
+<!-- [code 11-24,25] -->
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <script>
+        window.onload = function () {
+            // 이벤트를 연결합니다.
+            document.getElementById('header').onclick = function () {
+                alert('header');
+            };
+            document.getElementById('paragraph').onclick = function () {
+                alert('paragraph');
+            };
+        };
+    </script>
+</head>
+<body>
+    <h1 id="header">
+        <p id="paragraph">Paragraph</p>
+    </h1>
+</body>
+</html> -->
+
+
+
+<!-- [code 11-26] -->
+
+<!-- 인터넷 익스플로러는 이벤트 객체에 stopPropagation() 메서드가 없으므로 조건문으로 에러를 방지했습니다.
+"그 외의 브라우저에서 cancelBubble 속성을 사용하는 데 문제는 없나요?"
+속성을 사용하는 것은 문제가 있을 수 있지만, 속성에 값을 입력하는 것은 오류가 발생하지 않으니 문제가 없습니다. 쉽게 이벤트 전달을 막을 수 있겠죠? -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        window.onload = function () {
+            // 이벤트를 연결합니다.
+            document.getElementById('header').onclick = function () {
+                alert('header');
+            };
+            document.getElementById('paragraph').onclick = function (e) {
+                // 이벤트 객체를 처리합니다.
+                var event = e || window.event;
+                // 이벤트 발생을 알립니다.
+                alert('paragraph');
+                // 이벤트 전달을 제거합니다.
+                event.cancelBubble = true;
+                if (event.stopPropagation) {
+                    event.stopPropagation();
+                }
+            };
+        };
+    </script>
+</head>
+<body>
+    <h1 id="header">
+        <p id="paragraph">Paragraph</p>
+    </h1>
+</body>
+</html>
