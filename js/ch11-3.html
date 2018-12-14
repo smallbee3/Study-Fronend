@@ -1,0 +1,133 @@
+
+
+<!-- p.377 -->
+<!-- 11.9 인터넷 익스플로러 이벤트 모델 -->
+
+<!-- [code 11-27] -->
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <script>
+        window.attachEvent('onload', function () {
+        });
+    </script>
+</head>
+<body>
+
+</body>
+</html> -->
+
+
+
+<!-- [code 11-28] -->
+<!-- 인터넷 익스플로러의 이벤트 모델이므로 인터넷 익스플로러에서만 실행됩니다. -->
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <script>
+      // 윈도우가 로드될 때
+      if (window.attachEvent) {
+        window.attachEvent('onload', function () {
+            // my-header를 가져옵니다.
+            var header = document.getElementById('my-header');
+            // 이벤트를 연결합니다.
+            header.attachEvent('onclick', function () { alert('클릭'); });
+            header.attachEvent('onclick', function () { alert('클릭'); });
+            header.attachEvent('onclick', function () { alert('클릭'); });
+        });
+      } else {
+        alert('브라우저가 인터넷 익스플로러가 아닙니다.')
+      }
+
+    </script>
+</head>
+<body>
+    <h1 id="my-header">Click</h1>
+</body>
+</html> -->
+
+
+
+
+<!-- p.380 -->
+<!-- 11.10 표준 이벤트 모델 -->
+
+
+<!-- [code 11-31] -->
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <script>
+        window.onload = function () {
+            var header = document.getElementById('my-header');
+            header.addEventListener('click', function () {
+                this.innerHTML += '+';
+            });
+            header.addEventListener('click', function () {
+                this.innerHTML += '-';
+            });
+        };
+    </script>
+</head>
+<body>
+    <h1 id="my-header">Click</h1>
+</body>
+</html> -->
+
+
+<!-- [Myway] -->
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <script>
+        window.onload = function () {
+            var header = document.getElementById('my-header');
+            header.onclick = function () {
+              this.innerHTML = this.innerHTML + '+';
+            }
+            header.onclick = function () {
+              this.innerHTML = this.innerHTML + '-';
+            }
+        };
+    </script>
+</head>
+<body>
+    <h1 id="my-header">Click</h1>
+</body>
+</html> -->
+
+
+
+<!-- [code 11-32] -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        window.onload = function () {
+            var header = document.getElementById('my-header');
+            if (header.attachEvent) {
+                // 인터넷 익스플로러의 경우 실행합니다.
+                var handler = function () {
+                    window.event.srcElement.style.color = 'red';
+                    window.event.srcElement.detachEvent('onclick', handler);
+                };
+                header.attachEvent('onclick', handler);
+            } else {
+                console.log(this);
+                // 그 이외의 브라우저에서 실행합니다.
+                var handler = function () {
+                    console.log(this);
+                    this.style.color = 'red';
+                    this.innerHTML = this.innerHTML + '+';
+                    this.removeEventListener('click', handler);
+                };
+                header.addEventListener('click', handler);
+            }
+        };
+    </script>
+</head>
+<body>
+    <h1 id="my-header">Click</h1>
+</body>
+</html>
