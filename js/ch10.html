@@ -70,9 +70,10 @@
     window.onload = function () {
       var img = document.createElement('img');
 
-      img.src = 'penguin.jpeg';
+      // img.src = 'penguin.jpeg';
+      img.src = 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2-fairy-penguin-little-blue-penguin-1524251364.jpg';
       img.width = 500;
-      img.height = 350;
+      // img.height = 350;
       // img.data_propety = 350; // -> Doesn't appear
 
       document.body.appendChild(img);
@@ -145,7 +146,7 @@
 <!-- p.330 -->
 <!-- [code 10-12] -->
 
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <title>INDEX</title>
@@ -159,15 +160,19 @@
       output += '  <li>Ajax</li>';
       output += '</ul>';
 
-      document.body.textContent = output;
-      document.body.textContent += '<h1>Document Object Model</h1>'
+      document.body.innerHTML = output;
+      document.body.innerHTML += '<br>';
+      document.body.innerHTML += '<h1>Document Object Model</h1>'
+      document.body.innerHTML += '<img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2-fairy-penguin-little-blue-penguin-1524251364.jpg" alt="" width=500/>'
+
+      // document.body.textContent += '<h1>Document Object Model</h1>'
 
     };
   </script>
 </head>
 <body>
 </body>
-</html> -->
+</html>
 
 
 <!-- p.331 -->
@@ -252,7 +257,7 @@
 <!-- p.334 -->
 <!-- [code 10-17] -->
 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <title>INDEX</title>
@@ -292,7 +297,7 @@
   <h1>Header</h1>
   <h1>Header</h1>
 </body>
-</html>
+</html> -->
 
 
 
