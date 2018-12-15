@@ -38,6 +38,10 @@
       console.log(object[key]);
     }
 
+    console.log('object : ' + object);
+    console.log('object.toString() : ' + object.toString());
+
+
 
     // [code 8-5]
     // toString()
@@ -48,6 +52,8 @@
     console.log('object : ' + object);  // -> [object Object]
     console.log('object.toString() : ' + object.toString());  // -> [object Object]
 
+
+
     // [code 8-6]
     var student = {
       name: '윤명월',
@@ -57,8 +63,8 @@
       }
     };
     console.log(student); // -> {name: "윤명월", grade: "대학교 1학년", toString: ƒ}
-    alert(student); // -> "윤명월 : 대학교 1학년"
-
+    console(student); // -> "윤명월 : 대학교 1학년"
+    console.log(student.toString());
 
     // [code 8-7]
     // The problem of 'typeof' operator

@@ -21,6 +21,9 @@
 
     console.log(product.제1품명);
     console.log(product.유형2);
+    console.log(product.유형); // -> undefined
+    console.log(product['유형']); // -> undefined
+
     // console.log(product[제품명]); // -> ReferenceError: 제품명 is not defined
     // console.log(product['제품명']);
     // console.log(product['유형']);
@@ -72,16 +75,17 @@
 
     // p.178
     // 6.4.1 in 키워드
-    // var student = {
-    //   이름: '연하진',
-    //   국어: 92, 수학: 98, 영어: 96, 과학: 98
-    // };
-    // var output = '';
-    // output += "'이름' in student: " + ('이름' in student) + '\n';
-    // output += "'성별' in student: " + ('성별' in student) + '\n';
-    // output += "'영어' in student: " + ('영어' in student);
-    //
-    // console.log(output);
+    var student = {
+      이름: '연하진',
+      국어: 92, 수학: 98, 영어: 96, 과학: 98
+    };
+    var output = '';
+    output += "'이름' in student: " + ('이름' in student) + '\n';
+    output += "'성별' in student: " + ('성별' in student) + '\n';
+    output += "'영어' in student: " + ('영어' in student);
+    // output += "'영어' in student: " + '영어' in student; // -> false
+
+    console.log(output);
 
 
 
@@ -412,6 +416,7 @@
 
 </head>
 <body>
-  Hello JS!
+  Hello JS
+  </ol>
 </body>
 </html>
