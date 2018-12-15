@@ -1,0 +1,292 @@
+
+<!-- 12.3 고급 예외 처리 -->
+<!-- p.390 -->
+
+<!-- [code 12-4,5] -->
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <script>
+        try {
+            willExcept.byebye();
+        } catch (exception) {
+            alert('예외가 발생했습니다.');
+        } finally {
+            alert('예외 발생 가능 부분을 통과했습니다.');
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html> -->
+
+
+
+<!-- [code 12-6] -->
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function registerEventListener(node, event, listener) {
+            try {
+                // 구버전의 인터넷 익스플로러
+                node.attachEvent('on' + event, listener);
+            } catch (exception) {
+                // 최신 버전의 웹 브라우저
+                node.addEventListener(event, listener, false);
+            }
+        }
+        window.onload = function () {
+            var header = document.getElementById('header');
+            registerEventListener(header, 'click', function () {
+                alert('Click');
+            });
+            registerEventListener(header, 'click', function () {
+                alert('Click');
+            });
+        };
+    </script>
+</head>
+<body>
+    <h1 id="header">Click</h1>
+</body>
+</html> -->
+
+
+
+<!-- [code 12-8] -->
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <script>
+        try {
+            var array = new Array(999999999999);
+        } catch (exception) {
+
+            console.log(exception);
+            console.log(typeof exception);
+            console.log(JSON.stringify(exception));
+            console.log(exception.message);
+            console.log(exception.description);
+            console.log(exception.name);
+
+            var output = '';
+            for (var i in exception) {
+                // console.log(i);
+                // console.log(exception[i]);
+                output += i + ': ' + exception[i] + '\n';
+            }
+            alert(output);
+        }
+    </script>
+</head>
+<body>
+</body>
+</html> -->
+
+
+
+<!-- [code 12-9] -->
+<!-- 1) error -->
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <script>
+        try {
+            error+-error+++;
+        } catch (exception) {
+            alert('Exception');
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html> -->
+
+
+
+<!-- [code 12-11] -->
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <script>
+        try {
+            throw 'DivideByZeroException';
+        } catch (exception) {
+            if (exception == 'DivideByZeroException') {
+                alert('ㅇㅁㅇ');
+            }
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html> -->
+
+
+
+<!-- [code 12-12] -->
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <script>
+        // 함수를 선언합니다.
+        function divide(alpha, beta) {
+            if (beta == 0) {
+                throw 'DivideByZeroException';
+            } else {
+                return alpha / beta;
+            }
+        }
+        // 출력합니다.
+        try {
+            divide(10, 0);
+        } catch (exception) {
+            alert('Do not divide by zero!');
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html> -->
+
+
+
+<!-- p.398 -->
+<!-- 12.7.2 외부 자바스크립트 파일 -->
+
+<!-- [code 12-15,16,17] -->
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Index</title>
+    <script>
+        console.log(typeof (externalFileVariable));
+        console.log(typeof (externalFileFunction));
+        console.log(externalFileVariable);
+        console.log(externalFileFunction);
+    </script>
+    <script src="ch12_externalScript.js"></script>
+    <script>
+        console.log(typeof (externalFileVariable));
+        console.log(typeof (externalFileFunction));
+        console.log(externalFileVariable);
+        console.log(externalFileFunction);
+    </script>
+</head>
+<body>
+
+</body>
+</html> -->
+
+
+
+
+<!-- [code 12-18] -->
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Index</title>
+    <meta name="" content=""/>
+
+    <link rel="stylesheet" href="외부 스타일시트"/>
+    <style>
+      /* ... */
+    </style>
+    <script src="외부 자바스크립트"></script>
+    <script>
+      // ...
+    </script>
+</head>
+<body>
+
+</body>
+</html> -->
+
+
+
+
+<!-- p.402 -->
+<!-- [PRACTICE 03]  -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Index</title>
+    <meta name="" content=""/>
+    <script>
+
+      // (1) ReferenceError
+      console.log('(1)')
+      try {
+        error.error.error();
+      } catch(except) {
+        console.log(except)
+        console.log(except.message)
+        console.log(except.name)
+
+      } finally {
+        console.log('')
+      }
+
+      // (2) No Error
+      console.log('(2)')
+      try {
+        let array = [1,2,3,4,5];
+        console.log(array[-100]);
+      } catch(except) {
+        console.log(except)
+        console.log(except.message)
+        console.log(except.name)
+
+      } finally {
+        console.log('')
+      }
+
+      // (3) SyntaxError: Unexpected identifier
+      console.log('(3)')
+      try {
+        // let number = NEW Number(10);
+        let number = new Number(10);
+      } catch(except) {
+        console.log(except)
+        console.log(except.message)
+        console.log(except.name)
+
+      } finally {
+        console.log('')
+      }
+
+      // (4) TypeError
+      console.log('(4)')
+      try {
+        let number = 20;
+        number();
+      } catch(except) {
+        console.log(except)
+        console.log(except.message)
+        console.log(except.name)
+
+      } finally {
+        console.log('')
+      }
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
