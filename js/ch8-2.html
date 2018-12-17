@@ -100,7 +100,7 @@
     console.log(students); // -> changed
     var output = '이름\t총점\t평균\n';
     for (var i in students) {
-        output += students[i].toString();
+        if (i != 'remove') output += students[i].toString();
     }
     console.log(output); // -> changed
 

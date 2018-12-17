@@ -242,7 +242,7 @@
   <script>
     window.onload = function () {
       var headers = document.getElementsByTagName('h1');
-
+      console.log(headers);
     };
   </script>
 </head>
@@ -251,6 +251,28 @@
   <h1>Header</h1>
 </body>
 </html> -->
+
+
+<!-- 181217 -->
+<!-- p.333 -->
+<!-- gettElementByName(name) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>INDEX</title>
+  <script>
+    window.onload = function () {
+      var headers = document.getElementsByName('hello');
+      console.log(headers);
+    };
+  </script>
+</head>
+<body>
+  <h1 name='hello'>Header</h1>
+  <h1>Header</h1>
+</body>
+</html>
+
 
 
 
