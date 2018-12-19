@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Vue Components Communication Quiz</title>
+</head>
+<body>
+  <div id='app'>
+    <child-component v-bind:propsdata1='message'></child-component>
+    <!-- <sibling-component v-bind:propsdata1='anotherMessage'></sibling-component> -->
+    <sibling-component v-bind:propsdata2='anotherMessage'></sibling-component>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+  <script>
+
+    Vue.component('child-component', {
+      props: ['propsdata1'],
+      template: '<p>{{ propsdata1 }}</p>'
+    });
+
+    Vue.component('sibling-component', {
+      // props: ['propsdata1'],
+      // template: '<p>{{ propsdata1 }}</p>'
+      props: ['propsdata2'],
+      template: '<p>{{ propsdata2 }}</p>'
+    });
+
+    new Vue({
+      el: '#app',
+      data: {
+        message: 'This is props data from vue instance!',
+        anotherMessage: 'This is props data from vue instance2!'
+      }
+    })
+
+  </script>
+</body>
+</html>
