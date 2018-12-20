@@ -1,10 +1,10 @@
 <template lang="html">
   <section>
-    <ul>
+    <transition-group name="list" tag="ul">
       <!-- <li v-for="(item, index) in todoItems" class="shadow"> -->
 
       <!-- Reactivity(2): TodoList -->
-      <li v-for="(item, index) in propsdata" class="shadow">
+      <li v-for="(item, index) in propsdata" v-bind:key="item" class="shadow">
         <i class="checkBtn fas fa-check" aria-hidden="true"></i>
         <!-- {{ item != 'loglevel:webpack-dev-server' ? item : '' }} -->
         {{ item }}
@@ -13,7 +13,7 @@
           <i class="far fa-trash-alt" aria-hidden="true"></i>
         </span>
       </li>
-    </ul>
+    </transition-group>
   </section>
 </template>
 
@@ -74,4 +74,13 @@ export default {
     margin-left: auto;
     color: #de4343;
   }
+  /* Vue Animation */
+  .list-enter-active, .list-leave-active {
+    transition: all 1s;
+  }
+  .list-enter, .list-leave-to {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
 </style>
