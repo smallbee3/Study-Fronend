@@ -1,12 +1,10 @@
 <template lang="html">
   <section>
-    <!-- <ul>
-      <li>todo 1</li>
-      <li>todo 2</li>
-      <li>todo 3</li>
-    </ul> -->
     <ul>
-      <li v-for="(item, index) in todoItems" class="shadow">
+      <!-- <li v-for="(item, index) in todoItems" class="shadow"> -->
+
+      <!-- Reactivity(2): TodoList -->
+      <li v-for="(item, index) in propsdata" class="shadow">
         <i class="checkBtn fas fa-check" aria-hidden="true"></i>
         <!-- {{ item != 'loglevel:webpack-dev-server' ? item : '' }} -->
         {{ item }}
@@ -21,28 +19,29 @@
 
 <script>
 export default {
-  data() {
-    return {
-      todoItems: []
-    }
-  },
-  created() {
-    if (localStorage.length > 0) {
-      for (var i = 0; i < localStorage.length; i++) {
-        this.todoItems.push(localStorage.key(i));
-      }
-    }
-  },
-  methods: {
-    // removeTodo() {
-    //   console.log('clicked')
-    // }
-    removeTodo(item, index) {
-      // console.log(item, index);
+  // data() {
+  //   return {
+  //     todoItems: []
+  //   }
+  // },
+  // created() {
+  //   if (localStorage.length > 0) {
+  //     for (var i = 0; i < localStorage.length; i++) {
+  //       this.todoItems.push(localStorage.key(i));
+  //     }
+  //   }
+  // },
 
-      // delete localStorage.key(index); // -> not working
-      localStorage.removeItem(item);
-      this.todoItems.splice(index, 1);
+  // Reactivity(2): TodoList
+  props: ['propsdata'],
+
+  methods: {
+    removeTodo(item, index) {
+      // localStorage.removeItem(item);
+      // this.todoItems.splice(index, 1);
+
+      // Reactivity(4): TodoList(removeTodo)
+      this.$emit('remove-todo', item, index)
     }
   }
 

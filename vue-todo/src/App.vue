@@ -1,9 +1,9 @@
 <template lang="html">
   <div id="app">
     <TodoHeader></TodoHeader>
-    <TodoInput></TodoInput>
-    <TodoList></TodoList>
-    <TodoFooter></TodoFooter>
+    <TodoInput v-on:add-todo="addTodo"></TodoInput>
+    <TodoList v-bind:propsdata="todoItems" v-on:remove-todo="removeTodo"></TodoList>
+    <TodoFooter v-on:clear-todo="clearTodo"></TodoFooter>
   </div>
 </template>
 
@@ -14,6 +14,38 @@ import TodoList from './components/TodoList.vue'
 import TodoFooter from './components/TodoFooter.vue'
 
 export default {
+  // Reactivity(2): TodoList
+  data() {
+    return {
+      todoItems: []
+    }
+  },
+  created() {
+    if (localStorage.length > 0) {
+      for (var i = 0; i < localStorage.length; i++) {
+        this.todoItems.push(localStorage.key(i));
+      }
+    }
+  },
+  methods:{
+    // Reactivity(1): TodoInput - adding new item
+    addTodo(value) {
+      localStorage.setItem(value, value);
+      // This below code is the reason of changing the whole code p.160
+      this.todoItems.push(value);
+    },
+    // Reactivity(4): TodoList(removeTodo)
+    removeTodo(item, index) {
+      localStorage.removeItem(item);
+      this.todoItems.splice(index, 1);
+    },
+    // Reactivity(3): TodoFooter
+    clearTodo() {
+      localStorage.clear();
+      // this.todoItems.splice(0, this.todoItems.length);
+      this.todoItems = [];
+    }
+  },
   components: {
     'TodoHeader': TodoHeader,
     'TodoInput': TodoInput,

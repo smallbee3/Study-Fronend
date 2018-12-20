@@ -8,7 +8,10 @@
 export default {
   methods: {
     clearTodo() {
-      localStorage.clear();
+      // localStorage.clear();
+
+      // Reactivity(3): TodoFooter
+      this.$emit('clear-todo');
     }
   }
 }

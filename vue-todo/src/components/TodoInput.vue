@@ -19,10 +19,13 @@ export default {
   },
   methods: {
     addTodo() {
-      // console.log(this.newTodoItem);
+
       if (this.newTodoItem.trim() !== "") {
         var value = this.newTodoItem.trim();
-        localStorage.setItem(value, value);
+        // localStorage.setItem(value, value);
+
+        // Reactivity(1): TodoInput - adding new item
+        this.$emit('add-todo', value);
         this.clearInput();
       }
     },
