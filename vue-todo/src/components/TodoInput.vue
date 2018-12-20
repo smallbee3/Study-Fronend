@@ -7,14 +7,26 @@
     <span class="addContainer" v-on:click="addTodo">
       <i class="addBtn fas fa-plus" aria-hidden="true"></i>
     </span>
+
+    <modal v-if="showModal" v-on:close="showModal = false">
+      <h3 slot="header">Alert!</h3>
+      <span slot="footer" v-on:click="showModal = false">
+        Input what you want to do!
+        <i class="closeModalBtn fas fa-times" aria-hidden="true"></i>
+      </span>
+    </modal>
+
   </div>
 </template>
 
 <script>
+import Modal from './common/Modal.vue'
+
 export default {
   data() {
     return {
-      newTodoItem: ''
+      newTodoItem: '',
+      showModal: false
     }
   },
   methods: {
@@ -27,11 +39,16 @@ export default {
         // Reactivity(1): TodoInput - adding new item
         this.$emit('add-todo', value);
         this.clearInput();
+      } else {
+        this.showModal = !this.showModal;
       }
     },
     clearInput() {
       this.newTodoItem = '';
     }
+  },
+  components: {
+    'Modal': Modal
   }
 }
 </script>
