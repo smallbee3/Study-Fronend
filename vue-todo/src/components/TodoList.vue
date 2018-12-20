@@ -9,15 +9,35 @@
         <!-- {{ item != 'loglevel:webpack-dev-server' ? item : '' }} -->
         {{ item }}
         <!-- <span class="removeBtn" type="button" v-on:click="removeTodo"> -->
+
+        <span class="editBtn" type="button" v-on:click="editTodo(item, index)">
+          <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+        </span>
+
         <span class="removeBtn" type="button" v-on:click="removeTodo(item, index)">
           <i class="far fa-trash-alt" aria-hidden="true"></i>
         </span>
       </li>
     </transition-group>
+
+    <!-- Edit function using Modal -->
+    <modal v-if="showEditModal" v-on:close="showEditModal = false">
+      <h3 slot="header">Edit</h3>
+      <!-- <span slot="footer" v-on:click="showEditModal = false"> -->
+      <span slot="footer">
+        <input class="inputBox" type="text" v-model="editTodoItem" placeholder=this.editTodoItem
+        v-on:keyup.enter="addEditTodo();showEditModal = false">
+        <i class="writeModalBtn fas fa-pencil-alt" aria-hidden="true" v-on:click="addEditTodo();showEditModal = false"></i>
+        <i class="closeModalBtn fas fa-times" aria-hidden="true" v-on:click="showEditModal = false"></i>
+      </span>
+    </modal>
+
   </section>
 </template>
 
 <script>
+import Modal from './common/editModal.vue'
+
 export default {
   // data() {
   //   return {
@@ -35,6 +55,14 @@ export default {
   // Reactivity(2): TodoList
   props: ['propsdata'],
 
+  data() {
+    return {
+      showEditModal: false,
+      editTodoItem: '',
+      editIndex: ''
+    }
+  },
+
   methods: {
     removeTodo(item, index) {
       // localStorage.removeItem(item);
@@ -42,9 +70,21 @@ export default {
 
       // Reactivity(4): TodoList(removeTodo)
       this.$emit('remove-todo', item, index)
+    },
+    editTodo(item, index) {
+      // console.log(item, index);
+      this.showEditModal = !this.showEditModal;
+      this.editTodoItem = item;
+      this.editIndex = index;
+    },
+    addEditTodo() {
+      console.log(this.editTodoItem, this.editIndex);
+      this.$emit('edit-todo', this.editTodoItem, this.editIndex);
     }
+  },
+  components: {
+    'Modal': Modal
   }
-
 }
 </script>
 
@@ -70,8 +110,12 @@ export default {
     color: #62acde;
     margin-right: 5px;
   }
-  .removeBtn {
+  .editBtn {
     margin-left: auto;
+    color: #de4343;
+  }
+  .removeBtn {
+    margin-left: 15px;
     color: #de4343;
   }
   /* Vue Animation */
