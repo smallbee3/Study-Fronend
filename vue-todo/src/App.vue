@@ -1,4 +1,50 @@
-<template>
+<template lang="html">
+  <div id="app">
+    <TodoHeader></TodoHeader>
+    <TodoInput></TodoInput>
+    <TodoList></TodoList>
+    <TodoFooter></TodoFooter>
+  </div>
+</template>
+
+<script>
+import TodoHeader from './components/TodoHeader.vue'
+import TodoInput from './components/TodoInput.vue'
+import TodoList from './components/TodoList.vue'
+import TodoFooter from './components/TodoFooter.vue'
+
+export default {
+  components: {
+    'TodoHeader': TodoHeader,
+    'TodoInput': TodoInput,
+    'TodoList': TodoList,
+    'TodoFooter': TodoFooter
+  }
+}
+</script>
+
+<style lang="css">
+  body {
+    text-align: center;
+    background-color: #F6F6F8;
+  }
+  input {
+    border-style: groove;
+    width: 200px;
+  }
+  button {
+    border-style: groove;
+  }
+  .shadow {
+    box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.03)
+  }
+</style>
+
+
+
+
+
+<!-- <template>
   <div id="app">
     <img src="./assets/logo.png">
     <h1>{{ msg }}</h1>
@@ -57,4 +103,4 @@ li {
 a {
   color: #42b983;
 }
-</style>
+</style> -->
