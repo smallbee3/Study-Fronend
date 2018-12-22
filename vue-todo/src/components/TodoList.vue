@@ -78,7 +78,7 @@ export default {
       this.editIndex = index;
     },
     addEditTodo() {
-      console.log(this.editTodoItem, this.editIndex);
+      // console.log(this.editTodoItem, this.editIndex);
       this.$emit('edit-todo', this.editTodoItem, this.editIndex);
     }
   },
@@ -124,7 +124,7 @@ export default {
   }
   .list-enter, .list-leave-to {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateX(-30px);
   }
 
 </style>

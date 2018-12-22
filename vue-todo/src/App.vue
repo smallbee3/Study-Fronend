@@ -21,35 +21,98 @@ export default {
     }
   },
   created() {
-    if (localStorage.length > 0) {
-      for (var i = 0; i < localStorage.length; i++) {
-        this.todoItems.push(localStorage.key(i));
+    // if (localStorage.length > 0) {
+    //   for (var i = 0; i < localStorage.length; i++) {
+    //     this.todoItems.push(localStorage.key(i));
+    //   }
+    // }
+    var allCookies = this.getAllCookies();
+    if (allCookies.length > 0) {
+      for (var i = 0; i < allCookies.length; i++) {
+        this.todoItems.push(allCookies[i]);
       }
     }
   },
   methods:{
+    // cookie
+    setCookie(name,value,days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days*24*60*60*1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+    },
+    getCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0;i < ca.length;i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+        }
+        return null;
+    },
+    getAllCookies() {
+        var allCookies = [];
+        var ca = document.cookie.split(';');
+        for(var i=0;i < ca.length;i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf('csrftoken')=='-1') {
+              allCookies.push(c.substring(0,c.indexOf('=')));
+            }
+        }
+        return allCookies;
+    },
+    deleteCookie(name) {
+      document.cookie = name+'=; Max-Age=-99999999;';
+    },
+    deleteAllCookies() {
+        var ca = document.cookie.split(';');
+        for(var i=0;i < ca.length;i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf('csrftoken')=='-1') {
+              var name = c.substring(0,c.indexOf('='))
+              document.cookie = name+'=; Max-Age=-99999999;';
+            }
+        }
+    },
+
     // Reactivity(1): TodoInput - adding new item
     addTodo(value) {
-      localStorage.setItem(value, value);
       // This below code is the reason of changing the whole code p.160
       this.todoItems.push(value);
+
+      // localStorage.setItem(value, value);
+      this.setCookie(value, value, 7);
     },
     // Reactivity(4): TodoList(removeTodo)
     removeTodo(item, index) {
-      localStorage.removeItem(item);
+      this.deleteCookie(item);
+
+      // localStorage.removeItem(item);
       this.todoItems.splice(index, 1);
     },
     // Reactivity(3): TodoFooter
     clearTodo() {
-      localStorage.clear();
       // this.todoItems.splice(0, this.todoItems.length);
       this.todoItems = [];
+
+      // localStorage.clear();
+      this.deleteAllCookies();
     },
     editTodo(item, index) {
-      localStorage.removeItem(item);
+      var deleteItem = this.todoItems[index];
+
+      // localStorage.removeItem(deleteItem);
+      this.deleteCookie(deleteItem);
       this.todoItems.splice(index, 1);
 
-      localStorage.setItem(item, item);
+      // localStorage.setItem(item, item);
+      this.setCookie(item, item, 7);
       this.todoItems.push(item);
     }
   },
